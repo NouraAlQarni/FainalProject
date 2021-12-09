@@ -41,9 +41,9 @@ const createToken = (id) => {
 }
 
 module.exports.signup_post = async (request,response) => {
-    const {email, password,name,nationality,image} = request.body;
+    const {email, password} = request.body;
    try {
-      const user = await  User.create({email, password,name,nationality,image})
+      const user = await  User.create({email, password})
       const token = createToken(user._id)
       response.cookie('jwt', token, {httpOnly: true, maxAge: maxAge *1000 })
       response.status(201).json({user: user._id,token:token})
@@ -56,9 +56,9 @@ module.exports.signup_post = async (request,response) => {
 }
 
 module.exports.login_post = async (request,response) => {
-    const {email, password} = request.body;
+    const {email, password ,typeOfUser} = request.body;
         try {
-            const user = await User.login(email,password);
+            const user = await User.login(email,password,typeOfUser);
             const token = createToken(user._id)
             response.cookie('jwt', token, {httpOnly: true, maxAge: maxAge *1000 })
             response.status(200).json({user: user._id,token:token})

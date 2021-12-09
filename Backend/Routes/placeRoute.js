@@ -1,6 +1,7 @@
 const express = require('express');
 const Places = require('../Models/Places');
-const  City = require('../Models/cities')
+const  City = require('../Models/cities');
+const  Country = require('../Models/Countries')
 const router = express.Router();
 
 router.use(express.json())
@@ -30,19 +31,29 @@ router.get ( '/getPlace', async (request,response) => {
 
 // POST
 
-router.post ( '/createPlace/:idCity', async (request,response) => {
-    const findCity = await City.findById(request.params.idCity)
+router.post ( '/createPlace2/:idCountry/:idCity', async (request,response) => {
+    const findCountry = await Country.findById(request.params.idCountry).select('cities')
+        const test = findCountry.cities.map(city => {
+            if (city._id  == request.params.idCity ){
+                return city
+            }
+        })   
+    const findCity = await Country.findOne({_id: request.params.idCountry});
+    findCity['cities'].forEach ( city => {
+        if ( city._id == request.params.idCity){
+            const createPlaces = new Places ({
+                name: request.body.name,
+                location: request.body.location,
+                image: request.body.image,
+                typeOfPlace: request.body.typeOfPlace
+            })
+            city.places.push(createPlaces);
+            console.log(city.places);
+        }
+    })
     if (!findCity){
         return response.status(404).send("Not Found")
     }
-    const createPlaces = new Places ({
-        name: request.body.data.name,
-        location: request.body.data.location,
-        image: request.body.data.image,
-        typeOfPlace: request.body.data.typeOfPlace
-    })
-    findCity.places.push(createPlaces);
-    console.log(createPlaces);
 
     try {
         await findCity.save()
@@ -52,7 +63,11 @@ router.post ( '/createPlace/:idCity', async (request,response) => {
     catch(e) {
         console.error(e)
     }
-    console.log("Add");
+    console.log("Add"); 
+    if (!findCountry){
+        return response.status(404).send("Not Found")
+    }  
+
 })
 
 

@@ -1,7 +1,7 @@
-const mongoose = require ("mongoose")
-const Schema = mongoose.Schema;
 
-
+const db = require ( '../db/db');
+const  mongoose  = db.mongoose;
+const Schema =  db.Schema;
 const PlaceSchema = new Schema({
     name:{
         type: String },

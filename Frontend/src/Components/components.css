@@ -1,7 +1,9 @@
+* {
+  font-family: 'Cairo', sans-serif;
+}
 .btn {
     background-color: black;
     color: white;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-weight: bold;
     border-radius: 12px;  
 }
@@ -11,7 +13,6 @@
 }
 
 .navbar-brand {
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 20px;
     font-weight: bold;
     margin-left: 80px;
@@ -34,7 +35,6 @@
 }
 
 .Navbar , h4 {
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-weight: bold;
     color: #6d23b6 !important;
     text-align: center !important;
@@ -42,7 +42,6 @@
 }
 
 h1 , h3 {
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-weight: bold;
     color: #6d23b6 !important;
     text-align: center !important;
@@ -67,7 +66,6 @@ a {
 }
 
 .Footer {
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 18px;
     font-weight: bold;
     color: #6d23b6 !important;
