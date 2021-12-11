@@ -27,30 +27,15 @@ export default function Home (){
       <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="https://static.tacdn.com/img2/brand/home/home1021_dt@2x.webp" height="350px" width="1150px" alt="..."></img>
+      <img src="https://static.tacdn.com/img2/brand/home/home1021_dt@2x.webp" height="350px" width="1350px" alt="..."></img>
       <div class="carousel-caption d-none d-md-block">
       <input class="form-control me-1" type="search" placeholder="Where to ?" aria-label="Search"></input><button class="btn btn-outline-success" type="submit">Search</button>
         </div>
     </div>
   </div>
 </div>
-         {/* <br/><br/> <h1>Top Destinations</h1> <br/><br/>
-        <div className= "country">
-        {Country.map ( (element) => {
-                      return (
-
-        <div class="container">
-             <Link on to={{ pathname: `/City/${element._id}`,
-                                   data: {
-                                       element,
-                                    }
-                                    }}>
-                                  <img   className="card" src={element.image} height = {230} width = {350}></img></Link>
-                                  <p class="card-text">{element.name}</p>
-                      </div>)})}
-</div> */}
-
-      <br/><br/> <h1>Top Destinations</h1> <br/><br/>
+  
+      <br/><br/> <h3>Top Destinations</h3> <br/><br/>
               <div className= "country">
               {Country.map ( (element) => {
                             return (
@@ -59,7 +44,7 @@ export default function Home (){
           <div class="img-inner">
             <div class="inner-skew">
             <Link on to={{ pathname: `/City/${element._id}`,data: {element}}}>
-                  <img   className="card" src={element.image}></img>
+                  <img   className="card" src={element.image} ></img>
             </Link>
             </div>
           </div>
@@ -71,7 +56,7 @@ export default function Home (){
                             )})}
                             </div><br/><br/><br/>
 
-                            <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+  <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -79,19 +64,19 @@ export default function Home (){
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src = {img1} height = {450} width = {1000} ></img>
+      <img src = {img1} height = {480} width = {1600} ></img>
       <div class="carousel-caption d-none d-md-block">
         <h2>Travel Exploration</h2>
       </div>
     </div>
     <div class="carousel-item">
-      <img src = {img2} height = {450} width = {1000} ></img>
+      <img src = {img2} height = {480} width = {1600} ></img>
       <div class="carousel-caption d-none d-md-block">
         <h2>Dream Destination</h2>
       </div>
     </div>
     <div class="carousel-item">
-      <img src = {img3} height = {450} width = {1000} ></img>
+      <img src = {img3} height = {480} width = {1600} ></img>
       <div class="carousel-caption d-none d-md-block">
         <h2>Discover New Places</h2>
       </div>

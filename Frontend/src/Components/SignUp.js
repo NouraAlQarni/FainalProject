@@ -1,6 +1,43 @@
+import axios from "axios";
+import { useState } from "react";
+import jwt from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 
 export default function SignUp (){
+
+    
+    const [email,setEmail] = useState();
+    const [password,setPassword] = useState();
+
+
+    let navigate = useNavigate();
+
+    const signup = (e) => {
+        e.preventDefault();
+        axios.post(`http://localhost:3001/singup`,{
+            email,
+            password,
+    
+             
+        }).then((response) => {
+            console.log(response);
+            if(response.data.errors){
+
+            }
+            if(response.data.user){
+                const token = response.data.token;
+                const userSign = jwt(token);
+                console.log(token);
+                console.log(userSign);
+                localStorage.setItem('token',token);
+                navigate("/")
+                alert("You Are Signed")
+            }
+
+           });
+    }
+
     return (
     <div className="SignUp">
          <div class="modal-dialog">
@@ -12,13 +49,13 @@ export default function SignUp (){
             <div class="modal-body">
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></input>
+                    <input onChange = {(e)=> {setEmail(e.target.value)}} type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></input>
                     <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1"></input>  
+                    <input onChange = {(e)=> {setPassword(e.target.value)}} type="password" class="form-control" id="exampleInputPassword1"></input>  
                 </div>
                 </div>
                 <div class="modal-footer">
-                <button type="button" class="btn btn-primary">SignIn</button>
+                <button type="button" class="btn btn-primary" onClick = {(e)=>{signup(e)}}>SignIn</button>
                 </div>
             </div>
             </div>

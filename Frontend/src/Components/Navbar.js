@@ -1,5 +1,5 @@
 import * as Bootstrap from 'react-bootstrap';
-import { Routes, Route,Link } from "react-router-dom";
+import { Routes, Route, Link, useNavigate} from "react-router-dom";
 import './components.css';
 import Home from './Home';
 import Login from './Login';
@@ -11,10 +11,21 @@ import City from './City';
 
 
 export default function Navbar (){
+
+
+  let navigate = useNavigate();
+
+  const logout = (e) =>{
+      e.preventDefault();
+      localStorage.removeItem("token");
+      navigate ('/')
+      alert("LogedOut")
+  }
+
     return (
         <div className="Navbar">
 
-<Bootstrap.Nav class="navbar navbar-expand-lg navbar-light bg-light">
+<Bootstrap.Nav class="navbar navbar-expand-lg ">
   <div class="container-fluid">
     <a class="navbar-brand" href="/">
       <img  src={logo1} alt="" width="85" height="85" class="d-inline-block align-text-top"></img>
@@ -40,6 +51,7 @@ export default function Navbar (){
       </ul>
       <form class="d-flex">
         <Link to="/Login"><button className = 'btn'>Login</button></Link>
+        <Link to="/Logout"><button className = 'btn' onClick= {(e)=> logout(e)}>Logout</button></Link> 
       </form>
     </div>
   </div>
