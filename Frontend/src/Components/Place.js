@@ -1,102 +1,86 @@
 import { useParams } from "react-router"
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios  from 'axios';
 import {Link} from "react-router-dom";
 
 
-export default function City (){
-
-    const {more} = useParams()
-    const [city,setCity] = useState([])
-    const [loading,setLoading] = useState(true)
+export default function Place (){
+    
+    const {Id} = useParams()
+    const [place,setPlace] = useState([])
     const [name,setName] = useState();
     const [image,setImage] = useState();
+    const [location,setLocation] = useState();
     const [enableEdit,setEnabeEdit] = useState(false)
     const [idEdit,setIdEdit] = useState()
 
-    
-    useEffect (()=> {
 
-        console.log(more)
-        axios.get(`http://localhost:3001/country/getCountry/${more}`)
-        .then((response) => {
-        console.log(response.data);
-        setCity(response.data.cities);
-        setLoading(false)
+        // Add Place
 
-    })
-    }, []);
-
-    if (loading){
-        return (
-            <p>loading...</p>
-        )
-    }
-
-        // Add City
-
-        const addCity = (e) => {
+        const addPlace = (e) => {
             e.preventDefault()
-              axios.post(`http://localhost:3001/country/createCity/${more}`, {
+              axios.post(`http://localhost:3001/city/createPlace/${Id}`, {
                    data: {
                        name: e.target.form[0].value,
                        image: e.target.form[1].value,
+                       location: e.target.form[1].value,
                     }} 
               ).then(
                 (response) => {
-                  console.log("Add", response.data.cities);
-                  setCity(response.data.cities);
+                  console.log("Add", response.data);
+                  setPlace(response.data);
                 })
         }
 
-         // Delete City
+         // Delete Place
 
-       const deleteCity = (e,_id) => {
+       const deletePlace = (e,_id) => {
         e.preventDefault()
         console.log(_id)
-        axios.delete(`http://localhost:3001/country/deleteCity/${more}/${_id}`
+        axios.delete(`http://localhost:3001/city/deletePlace/${Id}/${_id}`
         ).then((response) => {
         console.log(" deleted", response)
-        setCity(response.data.cities);
+        setPlace(response.data);
     })
    }
 
-        // Update City
+
+  // Update Place
     
-  function updateCity(element){
+  function updatePlace(element){
     setIdEdit(element._id)
     setName(element.name)
     setImage(element.image)
+    setLocation(element.location)
     setEnabeEdit(true)
   }
 
-  function saveEditCity(e){
+  function saveEditPlace(e){
         e.preventDefault()
-      axios.put(`http://localhost:3001/country/updateCity/${more}/${idEdit}`,
+      axios.put(`http://localhost:3001/city/updatePlace/${Id}/${idEdit}`,
          { data :
             {
             name,
             image,
+            location,
             }
          })
             .then((response) => {
             console.log("Updated",response.data);
-            setCity(response.data);
+            setPlace(response.data);
         });
         setEnabeEdit(false)
   }
 
     return (
-        <div className="City">
-
-            {city?.map((element)=>{
+        <div className="Place">
+                   {place?.map((element)=>{
                  return (
-                    
                     <div class="a-box">
                     <div class="img-container">
                     <div class="img-inner">
                         <div class="inner-skew">
-                        <Link on to={{ pathname: `/City/${element._id}`,data: {element}}}>
+                        <Link on to={{ pathname: `/Place/${element._id}`,data: {element}}}>
                           <img className="card" src={element.image} ></img>
                         </Link><br/>
                     </div>
@@ -104,31 +88,33 @@ export default function City (){
                     </div>
                     <div class="text-container">
                         <br/><p class="card-text">{element.name}</p>
+                        <br/><p class="card-text">{element.location}</p>
                         <br/>
-                        <button className="btn" onClick={(e) =>{deleteCity(e,element._id)}}>Delete</button>
-                        <button className="btn" onClick={(e) =>{updateCity(element)}}>update</button>
+                        <button className="btn" onClick={(e) =>{deletePlace(e,element._id)}}>Delete</button>
+                        <button className="btn" onClick={(e) =>{updatePlace(element)}}>update</button>
                     </div>
                     </div> 
                  )
              })}
 
              <form>
-                <input  placeholder="City :"></input><br/>
+                <input  placeholder="Place :"></input><br/>
                 <input  placeholder="Image :"></input><br/>
+                <input  placeholder="location :"></input><br/>
                 <br/><br/>
-                <button className="btn" type="submit" onClick= {(e)=>addCity(e)}>Add</button><br/><br/>
+                <button className="btn" type="submit" onClick= {(e)=>addPlace(e)}>Add</button><br/><br/>
             </form>
 
             {(function(){
             if (enableEdit == true){
                 return ( 
             <form>
-                 <input value={name} onChange={(e)=>setName(e.target.value)} placeholder="City :"></input><br/>
+                 <input value={name} onChange={(e)=>setName(e.target.value)} placeholder="Place :"></input><br/>
                  <input value={image} onChange={(e)=>setImage(e.target.value)} placeholder="image :"></input><br/>
-                 <br/><br/><button className='btn' onClick={(e)=>{saveEditCity(e)}} >save</button><br/><br/>
+                 <input value={image} onChange={(e)=>setLocation(e.target.value)} placeholder="location :"></input><br/>
+                 <br/><br/><button className='btn' onClick={(e)=>{saveEditPlace(e)}} >save</button><br/><br/>
             </form>
-            ) }})()}
-
+            ) }})()} 
         </div>
-    )
-}
+
+    )}

@@ -9,9 +9,11 @@ import img3 from "./images/slider-3.jpg"
 
 
 export default function Home (){
-
-  
   const [Country,setCountry] = useState([]);
+  const [name,setName] = useState();
+  const [image,setImage] = useState();
+  const [enableEdit,setEnabeEdit] = useState(false)
+  const [idEdit,setIdEdit] = useState()
 
     
   useEffect (()=> {
@@ -22,10 +24,66 @@ export default function Home (){
       });
   }, []);
 
+  /// Add Country
+
+  const addCountry = (e) => {
+    e.preventDefault()
+      axios.post("http://localhost:3001/country/createCountry", {
+           data: {
+               name: e.target.form[0].value,
+               image: e.target.form[1].value, 
+              }}
+      ).then(
+        (response) => {
+          console.log("Add", response.data);
+          setCountry(response.data);
+        })
+}
+
+  // Delete Country
+
+  const deleteCountry = (e,_id) => {
+    e.preventDefault()
+    console.log(_id)
+    axios.delete(`http://localhost:3001/country/deleteCountry/${_id}`
+    ).then((response) => {
+    console.log(" deleted: ", response.data)
+    setCountry(response.data);
+
+})
+}
+
+  // Update Country
+    
+      function editCountry(element){
+        console.log(element)
+        setEnabeEdit(true)
+        setIdEdit(element._id)
+        setName(element.name)
+        setImage(element.image) 
+      }
+    
+      function saveEditCountry(e){
+            e.preventDefault()
+          axios.patch(`http://localhost:3001/country/updateCountry/${idEdit}`,
+             { data :
+                {
+                name,
+                image,
+                }
+             })
+                .then((response) => {
+                console.log("Updated",response.data);
+                setCountry(response.data);
+            });
+            setEnabeEdit(false)
+      }
+
+
     return (
       <div>
       <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner">
+    <div class="carousel-inner">
     <div class="carousel-item active">
       <img src="https://static.tacdn.com/img2/brand/home/home1021_dt@2x.webp" height="350px" width="1350px" alt="..."></img>
       <div class="carousel-caption d-none d-md-block">
@@ -44,7 +102,7 @@ export default function Home (){
           <div class="img-inner">
             <div class="inner-skew">
             <Link on to={{ pathname: `/City/${element._id}`,data: {element}}}>
-                  <img   className="card" src={element.image} ></img>
+                  <img className="card" src={element.image} ></img>
             </Link>
             </div>
           </div>
@@ -52,9 +110,32 @@ export default function Home (){
         <div class="text-container">
         <p class="card-text">{element.name}</p>
       </div>
+      <br/><button className='btn' onClick={(e) =>{deleteCountry(e,element._id)}}>Delete</button>
+      <button className='btn' onClick={(e) => {editCountry(element)}}>Edit</button>
       </div>
-                            )})}
-                            </div><br/><br/><br/>
+         )})}
+       
+    <br/><br/> 
+  
+          <form>
+                <input  placeholder="Country:"></input><br/>
+                <input  placeholder="image :"></input><br/>
+                <br/><br/><button className='btn' type="submit" onClick= {(e)=>addCountry(e)}>Add</button><br/><br/>
+          </form>
+
+          {(function(){
+            if (enableEdit == true){
+                return (
+                    <div>
+                      <form>
+                            <input value= {name} onChange= {(e)=>setName(e.target.value)} placeholder="Country :"></input><br/>
+                            <input value= {image} onChange= {(e)=>setImage(e.target.value)} placeholder="image :"></input><br/>
+                            <br/><br/><button className='btn' onClick={(e)=>{saveEditCountry(e)}} >save</button><br/><br/>
+                      </form>
+                </div>
+                ) }})()}
+   <br/><br/><br/>
+    </div>
 
   <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-indicators">
@@ -92,7 +173,7 @@ export default function Home (){
   </button>
   
 </div>
-
 <br/><br/><br/>
+
       </div>
 )}

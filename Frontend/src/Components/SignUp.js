@@ -9,6 +9,7 @@ export default function SignUp (){
     
     const [email,setEmail] = useState();
     const [password,setPassword] = useState();
+    const [typeOfUser,setTypeOfUser] = useState();
 
 
     let navigate = useNavigate();
@@ -18,12 +19,10 @@ export default function SignUp (){
         axios.post(`http://localhost:3001/singup`,{
             email,
             password,
-    
-             
+            typeOfUser    
         }).then((response) => {
             console.log(response);
             if(response.data.errors){
-
             }
             if(response.data.user){
                 const token = response.data.token;
@@ -34,7 +33,6 @@ export default function SignUp (){
                 navigate("/")
                 alert("You Are Signed")
             }
-
            });
     }
 
@@ -51,7 +49,11 @@ export default function SignUp (){
                     <label for="exampleInputEmail1" class="form-label">Email</label>
                     <input onChange = {(e)=> {setEmail(e.target.value)}} type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></input>
                     <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input onChange = {(e)=> {setPassword(e.target.value)}} type="password" class="form-control" id="exampleInputPassword1"></input>  
+                    <input onChange = {(e)=> {setPassword(e.target.value)}} type="password" class="form-control" id="exampleInputPassword1"></input> <br/>
+                    <input onChange = {(e)=> {setTypeOfUser(e.target.value)}} type="radio" id="admin" name="signup" value="admin"></input>
+                    <label for="admin">admin</label> <br/>
+                    <input onChange = {(e)=> {setTypeOfUser(e.target.value)}} type="radio" id="user" name="signup" value="user"></input>
+                    <label for="user">user</label>
                 </div>
                 </div>
                 <div class="modal-footer">
