@@ -4,13 +4,6 @@ const City = require('../Models/cities')
 const router = express.Router();
 
 router.use(express.json())
-// router.use(function(req, res, next) {
-//     res.setHeader("Access-Control-Allow-Origin", 'http://localhost:3001');
-//     res.setHeader('Access-Control-Allow-Methods', 'POST,GET,OPTIONS,PUT,DELETE');
-//     res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Accept');
-  
-//     next();
-//   });
 
 
 // GET
@@ -26,6 +19,7 @@ router.get ( '/getCountry', async (request,response) => {
         console.error(e)
     };
 })
+
 
 // GET Specific Country
 
@@ -44,7 +38,6 @@ router.get ( '/getCountry/:id', async (request,response) => {
 // POST
 
 router.post ( '/createCountry', async (request,response) => {
-
     const createCountry = new Country ({
         name: request.body.data.name,
         image: request.body.data.image,
@@ -113,7 +106,7 @@ router.delete ( '/deleteCountry/:id', async (request,response) => {
 
     /// Add City
 
-router.post ('/createCity/:id', async (request,response) => {
+  router.post ('/createCity/:id', async (request,response) => {
     const country= await Country.findById(request.params.id)
       const createCity = new City ({
           name: request.body.data.name,
@@ -131,6 +124,7 @@ router.post ('/createCity/:id', async (request,response) => {
       }
       console.log("Add");
   })
+
 
   // Delete City
 

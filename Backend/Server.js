@@ -16,7 +16,7 @@ const userRoutes = require('./Routes/userRoute')
 
 // Middleware
 
-// const {requireUser, checkUser} = require('./Middleware/userMiddleware')
+const {requireUser, checkUser} = require('./Middleware/userMiddleware')
 
 // Use
 
@@ -26,11 +26,11 @@ app.use('/comment', commentsRoutes)
 app.use('/country', countriesRoutes)
 app.use('/place', placeRoutes)
 app.use(userRoutes)
-// app.use(requireUser)
+app.use(requireUser)
 
 // Get
 
-// app.get('*',checkUser);
+app.get('*',checkUser);
 
 
 

@@ -88,15 +88,13 @@ export default function City (){
 
     return (
         <div className="City">
-
             {city?.map((element)=>{
-                 return (
-                    
+                 return (   
                     <div class="a-box">
                     <div class="img-container">
                     <div class="img-inner">
                         <div class="inner-skew">
-                        <Link on to={{ pathname: `/City/${element._id}`,data: {element}}}>
+                        <Link on to={{ pathname: `/Place/${more}/${element._id}`,data: {element}}}>
                           <img className="card" src={element.image} ></img>
                         </Link><br/>
                     </div>

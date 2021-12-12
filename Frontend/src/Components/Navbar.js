@@ -61,7 +61,7 @@ export default function Navbar (){
           <Routes>
                 <Route exact path="/" element = { <Home />}></Route>
                 <Route path="/City/:more" element = {<City />}></Route>
-                <Route path="/Place/:Id" element = {<Place/>}></Route>
+                <Route path="/Place/:countryId/:cityId" element = {<Place />}></Route>
                 <Route path="/About" element = {<About />}></Route>
                 <Route path="/Contact" element = {<ContactUs />}></Route>
                 <Route path="/Login" element = {<Login />}></Route>

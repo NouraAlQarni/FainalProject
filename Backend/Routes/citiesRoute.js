@@ -1,6 +1,7 @@
 const { response, request } = require('express');
 const express = require('express');
 const City = require('../Models/cities');
+const Country = require('../Models/Countries');
 const router = express.Router();
 const Place = require('../Models/Places')
 
@@ -21,11 +22,18 @@ router.get ( '/getCity', async (request,response) => {
 
 // GET Specific City
 
-router.get ( '/getCity/:id', async (request,response) => {
-    const _id = request.params.id
+
+router.get ( '/getCity/:countryId/:cityId', async (request,response) => {
+    const countryid = request.params.countryId
+    const cityid = request.params.cityId
     try {
-        const city = await City.findOne({_id})
-        response.send(city)
+        const country = await Country.findById(countryid)
+
+        country.cities.forEach((element)=>{
+            if(element._id == cityid){
+                response.send(element.places)
+            }
+        }) 
     }
     catch(e) {
         response.status(500).send()
@@ -33,42 +41,62 @@ router.get ( '/getCity/:id', async (request,response) => {
     };
 })
 
-
     /// Add Place
 
-    router.post ('/createPlace/:id', async (request,response) => {
-        const city = await City.findById(request.params.id)
-          const createPlace = new Place ({
-              name: request.body.name,
-              image: request.body.image,
-              location: request.body.location,
-          })
-          console.log(createPlace);
-          city.places.push(createPlace)
-          try {
-              await city.save()
+    router.post ('/createPlace/:countryId/:cityId', async (request,response) => {
+        const country = await Country.findById(request.params.countryId)
+        console.log(country)
+        const createPlace = new Place ({
+            name: request.body.data.name,
+            image: request.body.data.image,
+            location: request.body.data.location,
+        })
+        console.log(createPlace);
+        const cityid = request.params.cityId
+        
+        country.cities.forEach(async (elem)=>{
+            if(elem._id == cityid){
+                console.log("city "+ elem)
+                elem.places.push(createPlace)
+                try {
+              await country.save()
               response.status(201)
-              response.send(city)
+              response.send(elem.places)
           }
           catch(e) {
               console.error(e)
           }
+            }
+        })
+        
           console.log("Add");
       })
-      
+
     
       // Delete Place
     
-      router.delete ('/deletePlace/:cityID/:placeID', async (request,response) => {
+      router.delete ('/deletePlace/:countryId/:cityID/:placeID', async (request,response) => {
+        const country = await Country.findById(request.params.countryId)
+        const cityid = request.params.cityID
         const placeID = request.params.placeID;
          try {
-           const city = await City.findById(request.params.cityID)
-            if (!city){
-               return response.status(404),send()
+            if (!country){    
+               return response.status(404).send()
             }
-            await city.places.pull({_id: placeID})
-            await city.save()
-            response.status(201).send(city)
+            country.cities.forEach(async (elem)=>{
+                if(elem._id == cityid){
+                    console.log("city "+ elem)
+                    await elem.places.pull({_id: placeID})
+                    try {
+                  await country.save()
+                  response.status(201)
+                  response.send(elem.places)
+              }
+              catch(e) {
+                  console.error(e)
+              }
+                }
+            })
          }
          catch(e) {
              response.status(500).send();
@@ -78,27 +106,58 @@ router.get ( '/getCity/:id', async (request,response) => {
     
       // Update Place
     
-      router.put("/updatePlace/:cityID/:placeID", async (request,response) => {
+    //   router.put("/updatePlace/:countryId/:cityID/:placeID",
+    //    async (request,response) => {
+    //     const country = await Country.findById(request.params.countryId)
+    //     const cityid = request.params.cityID
+    //     const placeid = request.params.placeID
+
+    //     try {
+    //         if (!country){    
+    //            return response.status(404).send()
+    //         }
+
+    //         country.cities.forEach(async (elem)=>{
+    //             if(elem._id == cityid){
+    //                 // console.log(elem.places);
+    //                 elem.places.forEach(async (elem2)=>{
+    //                     if(elem2._id == placeid){
+    //                         console.log(elem2);
+    //                         Country.update ( {_id :request.params.placeID }
+    //                             ,{
+    //                                 $set :{
+    //                                     'places.$.name': request.body.name,
+    //                                     'places.$.image': request.body.image,
+    //                                     'places.$.location': request.body.location,
+    //                                 },
     
-        City.update (
-            {'places._id':request.params.placeID },{
-                $set :{
-                    'places.$.name': request.body.data.name,
-                    'places.$.image': request.body.data.image,
-                    'places.$.location': request.body.data.location,
-                },
-            },
-            async function (err,model){
-                if (err) {
-                    console.log(err);
-                    return response.send(err);
-                }  
-                const city = await City.findById(request.params.cityID);
-                response.status(201).send(city.places)
-            }
-        );
-      
-      });
+    //                             },
+    //                             async function (err,model){
+    //                                 if (err) {
+    //                                     console.log(err);
+    //                                     return response.send(err);
+    //                                 }  
+    //                             }
+    //                         ).exec();
+    //                     }
+    //                 // console.log(elem2)
+    //                 })
+    //                 try {
+    //               await country.save()
+    //               response.status(201)
+    //               response.send(elem.places)
+    //           }
+    //           catch(e) {
+    //               console.error(e)
+    //           }
+    //             }
+    //         })
+    //      }
+    //      catch(e) {
+    //          response.status(500).send();
+    //          console.error(e)
+    //      }       
+    //   });
     
 
 module.exports = router;
