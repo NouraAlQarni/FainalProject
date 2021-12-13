@@ -85,9 +85,22 @@ export default function Home (){
       <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="https://static.tacdn.com/img2/brand/home/home1021_dt@2x.webp" height="350px" width="1350px" alt="..."></img>
+      <img className='serchImg' src="https://static.tacdn.com/img2/brand/home/home1021_dt@2x.webp" height="350px" width="1350px" alt="..."></img>
       <div class="carousel-caption d-none d-md-block">
-      <input class="form-control me-1" type="search" placeholder="Where to ?" aria-label="Search"></input><button class="btn btn-outline-success" type="submit">Search</button>
+      <div class="container mt-4">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-9">
+            <div class="card1 p-4 mt-3">
+                {/* <h3 class="heading mt-5 text-center">Find amazing things to do.<br/>Anytime, anywhere.</h3> */}
+                <div class="d-flex justify-content-center px-5">
+                    <div class="search"> 
+                    <input type="text" class="search-input" placeholder="Where to ?" name=""></input><a href="#" class="search-icon"><button className='search-btn'>search</button></a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+      {/* <input class="form-control me-1" type="search" placeholder="Where to ?" aria-label="Search"></input><button class="btn btn-outline-success" type="submit">Search</button> */}
         </div>
     </div>
   </div>
@@ -96,31 +109,30 @@ export default function Home (){
       <br/><br/> <h3>Top Destinations</h3> <br/><br/>
               <div className= "country">
               {Country.map ( (element) => {
-                            return (
-      <div class="a-box">
-        <div class="img-container">
-          <div class="img-inner">
-            <div class="inner-skew">
-            <Link on to={{ pathname: `/City/${element._id}`,data: {element}}}>
-                  <img className="card" src={element.image} ></img>
-            </Link>
-            </div>
-          </div>
-        </div>
-        <div class="text-container">
-        <p class="card-text">{element.name}</p>
-      </div>
-      <br/><button className='btn' onClick={(e) =>{deleteCountry(e,element._id)}}>Delete</button>
-      <button className='btn' onClick={(e) => {editCountry(element)}}>Edit</button>
-      </div>
-         )})}
-       
+                return (
+                  <div class="container">
+                    <div class="card">
+                      <div class="box">
+                        <div class="content">
+                          <h4>{element.name}</h4>
+                        <button className='btn' onClick={(e) =>{deleteCountry(e,element._id)}}>Delete</button>
+                        <button className='btn' onClick={(e) => {editCountry(element)}}>Edit</button>
+                          <Link on to={{ pathname: `/City/${element._id}`,data: {element}}}>
+                                    <img className="card" src={element.image} height={230} width={370}></img>
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  )})}
+
     <br/><br/> 
   
           <form>
                 <input  placeholder="Country:"></input><br/>
                 <input  placeholder="image :"></input><br/>
-                <br/><br/><button className='btn' type="submit" onClick= {(e)=>addCountry(e)}>Add</button><br/><br/>
+                <br/><button className='btn' type="submit" 
+                onClick= {(e)=>addCountry(e)}>Add</button><br/><br/>
           </form>
 
           {(function(){

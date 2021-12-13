@@ -90,21 +90,18 @@ export default function City (){
         <div className="City">
             {city?.map((element)=>{
                  return (   
-                    <div class="a-box">
-                    <div class="img-container">
-                    <div class="img-inner">
-                        <div class="inner-skew">
+                    <div class="container">
+                    <div class="card">
+                      <div class="box">
+                        <div class="content">
+                        <h4>{element.name}</h4>
+                        <button className="btn" onClick={(e) =>{deleteCity(e,element._id)}}>Delete</button>
+                        <button className="btn" onClick={(e) =>{updateCity(element)}}>update</button>
                         <Link on to={{ pathname: `/Place/${more}/${element._id}`,data: {element}}}>
-                          <img className="card" src={element.image} ></img>
+                          <img className="card" src={element.image} height={230} width={370}></img>
                         </Link><br/>
                     </div>
                     </div>
-                    </div>
-                    <div class="text-container">
-                        <br/><p class="card-text">{element.name}</p>
-                        <br/>
-                        <button className="btn" onClick={(e) =>{deleteCity(e,element._id)}}>Delete</button>
-                        <button className="btn" onClick={(e) =>{updateCity(element)}}>update</button>
                     </div>
                     </div> 
                  )

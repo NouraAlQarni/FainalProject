@@ -3,14 +3,6 @@ const Comment = require('../Models/Comments');
 const router = express.Router();
 
 router.use(express.json())
-router.use(function(req, res, next) {
-    res.setHeader("Access-Control-Allow-Origin", 'http://localhost:3001');
-    res.setHeader('Access-Control-Allow-Methods', 'POST,GET,OPTIONS,PUT,DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Accept');
-  
-    next();
-  });
-
 
 // GET
 
@@ -47,37 +39,6 @@ router.post ( '/createComment', async (request,response) => {
     }
     console.log("Add");
 })
-
-
-// UPDATE
-
-router.put('/updateComment/:id', async (request,response)=> {
-    const allowedUpdates = ['body'];
-    const updates = Object.keys(request.body.data)
-    const isValidOperation  = updates.every((update)=> allowedUpdates.includes(update))
- 
-    if(!isValidOperation) {
-        return response.status(400).send({erro: 'Invalid updates'});
-    }
-    try {
-        const comment = await Comment.findOne({_id: request.params.id});
-
-        if(!comment) {return response.status(404).send(404).send()}
-        updates.forEach((update)=> {
-            comment[update] = request.body.data[update]
-        })
-        await comment.save()
-        response.status(200)
-        const comments = await Comment.find()
-        response.send(comments)
- 
-    } catch(e){
-        response.status(400).send(e)
-        console.error(e)
-    }
- })
- 
-
 
 // DELETE
 

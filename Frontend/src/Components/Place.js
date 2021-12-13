@@ -38,11 +38,8 @@ export default function Place (){
               ).then(
                 (response) => {
                     console.log("Add", response.data);
-
                         setPlace(response.data);
-                    }
-                )
-        }
+                    })}
 
          // Delete Place
 
@@ -68,21 +65,20 @@ export default function Place (){
 
                    {place.map((element)=>{
                  return (
-                    <div class="a-box">
-                    <div class="img-container">
-                    <div class="img-inner">
-                        <div class="inner-skew">
-                          <img className="card" src={element.image} ></img><br/>
+                 <div class="container">
+                    <div class="card">
+                      <div class="box">
+                        <div class="content">
+                           <h4>{element.name}</h4>
+                           <button className="btn" onClick={(e) =>{deletePlace(e,element._id)}}>Delete</button>
+                          <img className="card" src={element.image} height={230} width={370}></img><br/>
                     </div>
                     </div>
                     </div>
-                    <div class="text-container">
-                        <br/><p class="card-text">{element.name}</p>
-                        <br/><p class="card-text">{element.location}</p>
+                        <br/><p>{element.location}</p>
                         <br/>
-                        <button className="btn" onClick={(e) =>{deletePlace(e,element._id)}}>Delete</button>
+                       
                     </div>
-                    </div> 
                  )
              })}
 
