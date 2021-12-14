@@ -7,13 +7,13 @@ export default function Comments (){
     const {countryId,cityId, placeId} = useParams()
     const [comment,setComment] = useState([])
     const [loading,setLoading] = useState(true)
+    const [commentBody,setCommentBody] = useState()
 
         
     useEffect (()=> {
         axios.get(`http://localhost:3001/place/getComment/${countryId}/${cityId}/${placeId}`)
         .then((response) => {
-        console.log(response.data);
-        setPlace(response.data);
+        setComment(response.data);
         setLoading(false)
     })
     }, []);
@@ -22,13 +22,18 @@ export default function Comments (){
 
         const addComment = (e) => {
             e.preventDefault()
-              axios.post(`http://localhost:3001/place/createComment/${countryId}/${cityId}/${placeId}`, {
+            console.log(commentBody)
+              axios.post(`http://localhost:3001/place/createComment`, {
                    data: {
-                    commentBody: e.target.value,
+                    commentBody: commentBody,
+                    idCountry: countryId,
+                    idCity: cityId,
+                    idplace: placeId,
+                    iduser: "61b0a766fbac4fc92dca35f7"
                     }} 
               ).then(
                 (response) => {
-                    console.log("Add", response.data);
+                    console.log("Add", response);
                         setComment(response.data);
                     }
                 )
@@ -39,7 +44,17 @@ export default function Comments (){
        const deleteComment = (e,_id) => {
         e.preventDefault()
         console.log(_id)
-        axios.delete(`http://localhost:3001/place/deleteComment/${countryId}/${cityId}/${placeId}/${_id}`
+        axios.delete(`http://localhost:3001/place/deleteComment`,{
+            data: {
+                commentBody: e.target.value,
+                idCountry: countryId,
+                idCity: cityId,
+                idplace: placeId,
+                iduser: "61b0a766fbac4fc92dca35f7",
+                commentID: e.target.value,
+
+                }
+        }
         ).then((response) => {
         console.log(" deleted", response)
         setComment(response.data);
@@ -51,20 +66,18 @@ export default function Comments (){
                 <p>loading...</p>
             )
         }
-
     return (
         <div className="Comments">
-
             {comment.map((element)=>{
                  return (
                      <div>
-                        <textarea>{element.commentBody}</textarea>
-                        <button className="btn" onClick={(e)=>addComment(e)}>Add</button><br/><br/>
+                        <p>{element.commentBody}</p>
+                        <textarea class="form-control z-depth-1" rows="3" placeholder="Write comment ..." onChange={(e)=>{setCommentBody(e.target.value)}} ></textarea>
+                        
+                        <button className="btn" onClick={(e)=>addComment(e)}>post</button><br/><br/>
                         <button className="btn" onClick={(e)=>deleteComment(e,element._id)}>Delete</button>
                     </div>
-                 )
-             })}
-
+                 )})}
         </div>
     )
 }

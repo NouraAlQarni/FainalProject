@@ -11,7 +11,10 @@ const PlaceSchema = new Schema({
         type: String },
     typeOfPlace:{
         type: String,
-        enum:['Restaurant',"Hotel",'Place'] }
+        enum:['Restaurant',"Hotel",'Place'] },
+    comments: [{
+        type: Schema.Types.ObjectId,
+        ref: 'comment'}]
 })
 
 const Place = mongoose.model('place', PlaceSchema);

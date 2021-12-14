@@ -6,20 +6,6 @@ const router = express.Router();
 const Place = require('../Models/Places')
 
 
-// GET
-
-
-router.get ( '/getCity', async (request,response) => {
-    try {
-        const city = await City.find()
-        response.send(city)
-    }
-    catch(e) {
-        response.status(500).send()
-        console.error(e)
-    };
-})
-
 // GET Specific City
 
 

@@ -9,7 +9,6 @@ app.use(express.json())
 // Router
 
 const citiesRoutes = require('./Routes/citiesRoute')
-const commentsRoutes = require('./Routes/commentsRoute')
 const countriesRoutes = require('./Routes/countriesRoute')
 const placeRoutes = require('./Routes/placeRoute')
 const userRoutes = require('./Routes/userRoute')
@@ -22,7 +21,6 @@ const {requireUser, checkUser} = require('./Middleware/userMiddleware')
 
 app.use(cors())
 app.use('/city', citiesRoutes)
-app.use('/comment', commentsRoutes)
 app.use('/country', countriesRoutes)
 app.use('/place', placeRoutes)
 app.use(userRoutes)

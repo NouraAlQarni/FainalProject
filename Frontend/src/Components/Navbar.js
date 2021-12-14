@@ -67,7 +67,6 @@ export default function Navbar (){
                 <Route path="/Login" element = {<Login />}></Route>
                 <Route path="/SignUp" element = {<SignUp />}></Route>  
            </Routes>
-
         </div>
     )
 }

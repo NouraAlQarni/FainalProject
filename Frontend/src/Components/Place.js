@@ -1,6 +1,7 @@
 import { useParams } from "react-router"
 import { useState, useEffect } from "react";
 import axios  from 'axios';
+import Comments from "./Comments";
 
 
 
@@ -65,13 +66,14 @@ export default function Place (){
 
                    {place.map((element)=>{
                  return (
-                 <div class="container">
+                 <div class="container"><br/><br/><br/>
                     <div class="card">
                       <div class="box">
                         <div class="content">
                            <h4>{element.name}</h4>
                            <button className="btn" onClick={(e) =>{deletePlace(e,element._id)}}>Delete</button>
                           <img className="card" src={element.image} height={230} width={370}></img><br/>
+                          <Comments/>
                     </div>
                     </div>
                     </div>
