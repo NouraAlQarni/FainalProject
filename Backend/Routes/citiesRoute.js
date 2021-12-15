@@ -27,6 +27,33 @@ router.get ( '/getCity/:countryId/:cityId', async (request,response) => {
     };
 })
 
+
+// GET Specific Place
+
+
+   router.get ( '/getPlace/:countryId/:cityId/:placeId', async (request,response) => {
+    const countryId = request.params.countryId
+    const cityId = request.params.cityId
+    const placeId = request.params.placeId
+    try {
+        const country = await Country.findById(countryId)
+        country.cities.forEach((element)=>{
+            if(element._id == cityId){
+                element.places.forEach((element1)=>{
+                    if(element1._id == placeId){
+                        response.send(element1)
+                    }  
+                }  
+                )}
+        }) 
+    }
+    catch(e) {
+        response.status(500).send()
+        console.error(e)
+    };
+})
+
+
     /// Add Place
 
     router.post ('/createPlace/:countryId/:cityId', async (request,response) => {

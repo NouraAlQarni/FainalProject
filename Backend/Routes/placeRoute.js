@@ -8,6 +8,7 @@ const router = express.Router();
 router.use(express.json())
 
 
+
 // GET Comment
 
 
@@ -15,21 +16,14 @@ router.get ( '/getComment/:countryId/:cityId/:placeId', async (request,response)
     const countryid = request.params.countryId
     const cityid = request.params.cityId
     try {
-        const country = await Country.findById(countryid)
+        const country = await Country.findById(countryid).populate("cities.places.comments")
 
         country.cities.forEach((element)=>{
             if(element._id == cityid){
                 element.places.forEach(async (element)=>{
                     if(element._id == request.params.placeId ){
-                        console.log("ggg")
-                        response.send(element.comments)
-                        // const creatComment = new Comment({
-                        //     commentBody: request.body.data.commentBody,
-                        //      user: request.body.data.iduser,
-                        //      place: request.body.data.idplace,
-                        //      })
-                        //         await element.comments.push(creatComment)
-                        //         await creatComment.save()
+                        console.log("ggg")      
+                        response.send(element)
                     }
                 })
             }
@@ -86,18 +80,18 @@ router.get ( '/getComment/:countryId/:cityId/:placeId', async (request,response)
 
 router.post ( '/createComment', async (request,response) => {
 
-    await Country.findById(request.body.data.idCountry).then(country => {
-        const cityid = request.body.data.idCity
-        const user = request.body.data.iduser 
+    await Country.findById(request.body.idCountry).populate("cities.places.comments").then(country => {
+        const cityid = request.body.idCity
+        const user = request.body.iduser 
         country.cities.forEach(async (elem)=>{
             
             if(elem._id == cityid){
                 elem.places.forEach(async (element)=>{
                     if(element._id == request.body.idplace ){
                         const creatComment = new Comment({
-                            commentBody: request.body.data.commentBody,
-                             user: request.body.data.iduser,
-                             place: request.body.data.idplace,
+                            commentBody: request.body.commentBody,
+                             user: request.body.iduser,
+                             place: request.body.idplace,
                              })
                                 await element.comments.push(creatComment)
                                 await creatComment.save()
@@ -119,28 +113,28 @@ router.post ( '/createComment', async (request,response) => {
 
 // DELETE
 
-router.delete ( '/deleteComment', async (request,response) => {
+router.delete ( '/deleteComment/:commentID', async (request,response) => {
    
-    await Comment.findByIdAndDelete(request.body.data.commentID)
+    await Comment.findByIdAndDelete(request.params.commentID)
     // .then((comment)=>{
         // comment.save()
         // response.send('Done')
     // })
-    await Country.findById(request.body.data.idCountry).then(country => {
+    console.log(request.body);
+    await Country.findById(request.body.idCountry).populate("cities.places.comments").then(country => {
 
-        const cityid = request.body.data.idCity;
-        const user = request.body.data.iduser;
-        const place = request.body.data.idplace;
-        const commentID = request.body.data.commentID;
+        const cityid = request.body.idCity;
+        const user = request.body.iduser;
+        const place = request.body.idplace;
 
         country.cities.forEach(async (elem)=>{    
             if(elem._id == cityid){
                 console.log("city "+ elem)
                 elem.places.forEach(async (element)=>{
-                    console.log("مرحبا");
                     if(element._id == request.body.data.idplace){
                         console.log(element);
-                       await element.comments.pull({_id: request.body.data.commentID})
+                       await element.comments.pull({_id: request.params.commentID})
+                       response.send(element)
 
                     // element.comments.forEach(async (element1)=>{
                     //         console.log("jjj")

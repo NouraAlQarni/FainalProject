@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import img1 from "./images/slider-1.jpg"
 import img2 from "./images/slider-2.jpg"
 import img3 from "./images/slider-3.jpg"
+import jwt_decode from "jwt-decode";
 
 
 
@@ -78,6 +79,27 @@ export default function Home (){
             });
             setEnabeEdit(false)
       }
+
+      let decodedData ;
+      const storedToken = localStorage.getItem("token");
+      if (storedToken){
+          decodedData = jwt_decode(storedToken, { payload: true });
+          console.log(decodedData);
+          let expirationDate = decodedData.exp;
+          let current_time = Date.now() / 1000;
+          if(expirationDate < current_time)
+          {
+              localStorage.removeItem("token");
+          }
+     }
+
+      // const decode = (id) => {
+      //   if (decodedData != undefined){
+      //       // if (decodedData.id == more){
+      //           return (
+      //               <div>
+      //               <button onClick={(e) =>{(e,id)}}>Delete</button>
+      //               </div>)}}
 
 
     return (

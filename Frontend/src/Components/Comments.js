@@ -13,6 +13,7 @@ export default function Comments (){
     useEffect (()=> {
         axios.get(`http://localhost:3001/place/getComment/${countryId}/${cityId}/${placeId}`)
         .then((response) => {
+            
         setComment(response.data);
         setLoading(false)
     })
@@ -23,7 +24,7 @@ export default function Comments (){
         const addComment = (e) => {
             e.preventDefault()
             console.log(commentBody)
-              axios.post(`http://localhost:3001/place/createComment`, {
+            axios.post('http://localhost:3001/place/createComment', {
                    data: {
                     commentBody: commentBody,
                     idCountry: countryId,
@@ -33,7 +34,7 @@ export default function Comments (){
                     }} 
               ).then(
                 (response) => {
-                    console.log("Add", response);
+                    console.log("Add", response.data);
                         setComment(response.data);
                     }
                 )
@@ -52,7 +53,6 @@ export default function Comments (){
                 idplace: placeId,
                 iduser: "61b0a766fbac4fc92dca35f7",
                 commentID: e.target.value,
-
                 }
         }
         ).then((response) => {
@@ -68,13 +68,12 @@ export default function Comments (){
         }
     return (
         <div className="Comments">
-            {comment.map((element)=>{
+          <textarea class="form-control z-depth-1" rows="2" placeholder="Write comment ..." onChange={(e)=>{setCommentBody(e.target.value)}}></textarea>
+                        <button className="btn" onClick={(e)=>addComment(e)}>post</button><br/><br/>
+            {comment?.map((element)=>{
                  return (
                      <div>
-                        <p>{element.commentBody}</p>
-                        <textarea class="form-control z-depth-1" rows="3" placeholder="Write comment ..." onChange={(e)=>{setCommentBody(e.target.value)}} ></textarea>
-                        
-                        <button className="btn" onClick={(e)=>addComment(e)}>post</button><br/><br/>
+                        <p>{element.commentBody}</p>     
                         <button className="btn" onClick={(e)=>deleteComment(e,element._id)}>Delete</button>
                     </div>
                  )})}

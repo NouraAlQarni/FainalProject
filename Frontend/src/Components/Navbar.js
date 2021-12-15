@@ -9,6 +9,7 @@ import ContactUs from './ContactUs';
 import logo1 from './logo1.png'
 import City from './City';
 import Place from './Place';
+import PlaceDetails from './PlaceDetails';
 
 
 export default function Navbar (){
@@ -57,11 +58,11 @@ export default function Navbar (){
     </div>
   </div>
 </Bootstrap.Nav>
-
           <Routes>
                 <Route exact path="/" element = { <Home />}></Route>
                 <Route path="/City/:more" element = {<City />}></Route>
                 <Route path="/Place/:countryId/:cityId" element = {<Place />}></Route>
+                <Route path="/PlaceDetails/:countryId/:cityId/:placeId" element = {<PlaceDetails/>}></Route>
                 <Route path="/About" element = {<About />}></Route>
                 <Route path="/Contact" element = {<ContactUs />}></Route>
                 <Route path="/Login" element = {<Login />}></Route>

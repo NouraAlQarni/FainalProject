@@ -1,7 +1,7 @@
 import { useParams } from "react-router"
 import { useState, useEffect } from "react";
 import axios  from 'axios';
-import Comments from "./Comments";
+import {Link} from "react-router-dom";
 
 
 
@@ -64,7 +64,7 @@ export default function Place (){
         
         <div className="Place">
 
-                   {place.map((element)=>{
+            {place.map((element)=>{
                  return (
                  <div class="container"><br/><br/><br/>
                     <div class="card">
@@ -72,8 +72,9 @@ export default function Place (){
                         <div class="content">
                            <h4>{element.name}</h4>
                            <button className="btn" onClick={(e) =>{deletePlace(e,element._id)}}>Delete</button>
-                          <img className="card" src={element.image} height={230} width={370}></img><br/>
-                          <Comments/>
+                          <Link on to={{ pathname: `/PlaceDetails/${countryId}/${cityId}/${element._id}`,data: {element}}}>
+                          <img className="card" src={element.image} height={230} width={370}></img>
+                          </Link><br/>     
                     </div>
                     </div>
                     </div>
