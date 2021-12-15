@@ -19,7 +19,8 @@ const userSchema = new Schema({
         required: [true, "please enter an password"]},
     typeOfUser: {
         type: String,
-        enum :['user','admin']
+        enum: ['user','admin'],
+        default: "user"
     }
     
  

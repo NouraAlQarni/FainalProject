@@ -75,8 +75,8 @@ export default function Place (){
                           <Link on to={{ pathname: `/PlaceDetails/${countryId}/${cityId}/${element._id}`,data: {element}}}>
                           <img className="card" src={element.image} height={230} width={370}></img>
                           </Link><br/>     
-                    </div>
-                    </div>
+                        </div>
+                     </div>
                     </div>
                         <br/><p>{element.location}</p>
                         <br/>
@@ -92,7 +92,7 @@ export default function Place (){
                 <input  placeholder="location :"></input><br/>
                 <br/><br/>
                 <button className="btn" type="submit" onClick= {(e)=>addPlace(e)}>Add</button><br/><br/>
-            </form>
+             </form>
 
             <br/><br/>
         </div>

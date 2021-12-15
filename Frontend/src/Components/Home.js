@@ -95,11 +95,28 @@ export default function Home (){
 
       // const decode = (id) => {
       //   if (decodedData != undefined){
-      //       // if (decodedData.id == more){
-      //           return (
+      //       if (decodedData.id == userId){
+      //         if (typeOfUser == "admin"){
+      //            return (
       //               <div>
-      //               <button onClick={(e) =>{(e,id)}}>Delete</button>
-      //               </div>)}}
+      //                   <button className='btn' onClick={(e) =>{deleteCountry(e,id)}}>Delete</button>
+      //                   <button className='btn' onClick={(e) => {editCountry(id)}}>Edit</button>
+      //               </div>
+      //            )}}
+      //         }
+      //       } 
+            
+      // const decode1 = (id) => {
+      //   if (decodedData != undefined){
+      //       if (decodedData.id == userId){
+      //         if (typeOfUser == "admin"){
+      //            return (           
+      //               <form>
+      //               <input  placeholder="Country:"></input><br/>
+      //               <input  placeholder="image :"></input><br/>
+      //               <br/><button className='btn' type="submit" onClick= {(e)=>addCountry(e)}>Add</button><br/><br/>
+      //              </form>
+      //                   )}}}} 
 
 
     return (
@@ -137,8 +154,8 @@ export default function Home (){
                       <div class="box">
                         <div class="content">
                           <h4>{element.name}</h4>
-                        <button className='btn' onClick={(e) =>{deleteCountry(e,element._id)}}>Delete</button>
-                        <button className='btn' onClick={(e) => {editCountry(element)}}>Edit</button>
+                        {/* <button className='btn' onClick={(e) =>{deleteCountry(e,element._id)}}>Delete</button>
+                        <button className='btn' onClick={(e) => {editCountry(element)}}>Edit</button> */}
                           <Link on to={{ pathname: `/City/${element._id}`,data: {element}}}>
                                     <img className="card" src={element.image} height={230} width={370}></img>
                           </Link>
@@ -150,12 +167,12 @@ export default function Home (){
 
     <br/><br/> 
   
-          <form>
+          {/* <form>
                 <input  placeholder="Country:"></input><br/>
                 <input  placeholder="image :"></input><br/>
                 <br/><button className='btn' type="submit" 
                 onClick= {(e)=>addCountry(e)}>Add</button><br/><br/>
-          </form>
+          </form> */}
 
           {(function(){
             if (enableEdit == true){
@@ -210,4 +227,6 @@ export default function Home (){
 <br/><br/><br/>
 
       </div>
-)}
+)
+
+}

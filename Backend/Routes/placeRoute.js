@@ -113,47 +113,40 @@ router.post ( '/createComment', async (request,response) => {
 
 // DELETE
 
-router.delete ( '/deleteComment/:commentID', async (request,response) => {
+router.delete ( '/deleteComment/:idCountry/:idCity/:idplace/:commentID', async (request,response) => {
    
     await Comment.findByIdAndDelete(request.params.commentID)
     // .then((comment)=>{
         // comment.save()
         // response.send('Done')
     // })
-    console.log(request.body);
-    await Country.findById(request.body.idCountry).populate("cities.places.comments").then(country => {
+    console.log(request.params.idCountry);
+    await Country.findById(request.params.idCountry).populate("cities.places.comments").then(country => {
 
-        const cityid = request.body.idCity;
-        const user = request.body.iduser;
-        const place = request.body.idplace;
+        const cityid = request.params.idCity;
+        const user = request.params.iduser;
+        const place = request.params.idplace;
 
         country.cities.forEach(async (elem)=>{    
             if(elem._id == cityid){
                 console.log("city "+ elem)
                 elem.places.forEach(async (element)=>{
-                    if(element._id == request.body.data.idplace){
+                    if(element._id == request.params.idplace){
                         console.log(element);
                        await element.comments.pull({_id: request.params.commentID})
-                       response.send(element)
-
-                    // element.comments.forEach(async (element1)=>{
-                    //         console.log("jjj")
-                    //         if(element1._id == request.body.commentID){
-                    //             console.log("ttt")
-                    //             await element1.pull({_id: request.body.commentID})  
-                    //         }
+                      
+                       try {
+                       await  country.save()
+                        response.status(201)
+                        response.send(element)
+                    }
+                    catch(e) {
+                        console.error(e)
+                    }
                         }
                     })
                     }})
-
-                try {
-              country.save()
-              response.status(201)
-              response.send("elem.places")
-          }
-          catch(e) {
-              console.error(e)
-          }
+             
        
     })
     console.log("Deleted");

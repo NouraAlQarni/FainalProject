@@ -50,29 +50,28 @@ export default function PlaceDetails (){
                 )
         }
 
-         // Delete Comment
+        // Delete Comment
 
        const deleteComment = (e,_id) => {
         e.preventDefault()
         console.log(_id)
-        axios.delete(`http://localhost:3001/place/deleteComment/${_id}`,{
-                commentBody: e.target.value,
-                idCountry: countryId,
-                idCity: cityId,
-                idplace: placeId,
-                iduser: "61b0a766fbac4fc92dca35f7",       
-        }).then((response) => {
+        axios.delete(`http://localhost:3001/place/deleteComment/${countryId}/${cityId}/${placeId}/${_id}`
+        // ,{
+        //         commentBody: e.target.value,
+        //         // idCountry: countryId,
+        //         // idCity: cityId,
+        //         // idplace: placeId,
+        //         iduser: "61b0a766fbac4fc92dca35f7",       
+        // }
+        ).then((response) => {
         console.log(" deleted", response)
         setDetail(response.data);
         setComment(response.data.comments);
         })
         }
 
-
     if (loading){
-        return (
-            <p>loading...</p>
-        )
+        return (<p>loading...</p>)
     }
 
     return (
