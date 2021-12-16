@@ -14,9 +14,7 @@
 
 .About {
   position:relative;
-   opacity: 0.3;
-   height: 5%;
-   width: 55%;
+   opacity: 0.2;
 }
 .disply {
     position: absolute;
@@ -94,5 +92,13 @@ form {
 }
 .shadow-textarea textarea.form-control {
     padding-left: 0.8rem;
-}  
+} 
+
+.Login {
+    margin-left: 100px;
+}
+
+.SignUp {
+   margin-left: 170px;   
+}
   

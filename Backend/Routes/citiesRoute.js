@@ -19,6 +19,10 @@ router.get ( '/getCity/:countryId/:cityId', async (request,response) => {
             if(element._id == cityid){
                 response.send(element.places)
             }
+            if (element.name == cityid){
+                response.send(element.places)
+            }
+
         }) 
     }
     catch(e) {

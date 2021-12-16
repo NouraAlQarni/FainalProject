@@ -1,6 +1,7 @@
 import * as Bootstrap from 'react-bootstrap';
 import axios  from 'axios';
 import { useEffect, useState } from "react";
+import { useParams } from "react-router"
 import {Link} from "react-router-dom";
 import img1 from "./images/slider-1.jpg"
 import img2 from "./images/slider-2.jpg"
@@ -10,11 +11,14 @@ import jwt_decode from "jwt-decode";
 
 
 export default function Home (){
+  
   const [Country,setCountry] = useState([]);
   const [name,setName] = useState();
+  const [search,setSearch] = useState();
   const [image,setImage] = useState();
   const [enableEdit,setEnabeEdit] = useState(false)
   const [idEdit,setIdEdit] = useState()
+  const {countryId,cityName} = useParams()
 
     
   useEffect (()=> {
@@ -53,6 +57,18 @@ export default function Home (){
 
 })
 }
+
+  // search by city 
+
+  const searchCity = (e) => {
+    e.preventDefault()
+    axios.get(`http://localhost:3001/city/getCity/${countryId}/${cityName}`)
+    .then((response) => {
+      console.log(response.data);
+      setSearch(response.data);
+     })
+    }
+ 
 
   // Update Country
     
@@ -93,30 +109,29 @@ export default function Home (){
           }
      }
 
-      // const decode = (id) => {
-      //   if (decodedData != undefined){
-      //       if (decodedData.id == userId){
-      //         if (typeOfUser == "admin"){
-      //            return (
-      //               <div>
-      //                   <button className='btn' onClick={(e) =>{deleteCountry(e,id)}}>Delete</button>
-      //                   <button className='btn' onClick={(e) => {editCountry(id)}}>Edit</button>
-      //               </div>
-      //            )}}
-      //         }
-      //       } 
+      const decode = (id) => {
+        if (decodedData != undefined){
+          console.log(decodedData);
+              if ( decodedData.typeOfUser == "admin"){
+                 return (
+                    <div>
+                        <button className='btn' onClick={(e) =>{deleteCountry(e,id)}}>Delete</button>
+                        <button className='btn' onClick={(e) => {editCountry(id)}}>Edit</button>
+                    </div>
+                 )}
+              }
+            } 
             
-      // const decode1 = (id) => {
-      //   if (decodedData != undefined){
-      //       if (decodedData.id == userId){
-      //         if (typeOfUser == "admin"){
-      //            return (           
-      //               <form>
-      //               <input  placeholder="Country:"></input><br/>
-      //               <input  placeholder="image :"></input><br/>
-      //               <br/><button className='btn' type="submit" onClick= {(e)=>addCountry(e)}>Add</button><br/><br/>
-      //              </form>
-      //                   )}}}} 
+      const decode1 = (id) => {
+        if (decodedData != undefined){
+              if (decodedData.typeOfUser == "admin"){
+                 return (           
+                    <form>
+                    <input  placeholder="Country:"></input><br/>
+                    <input  placeholder="image :"></input><br/>
+                    <br/><button className='btn' type="submit" onClick= {(e)=>addCountry(e)}>Add</button><br/><br/>
+                   </form>
+                        )}}} 
 
 
     return (
@@ -133,7 +148,7 @@ export default function Home (){
                 {/* <h3 class="heading mt-5 text-center">Find amazing things to do.<br/>Anytime, anywhere.</h3> */}
                 <div class="d-flex justify-content-center px-5">
                     <div class="search"> 
-                    <input type="text" class="search-input" placeholder="Where to ?" name=""></input><a href="#" class="search-icon"><button className='search-btn'>search</button></a></div>
+                    <input type="text" class="search-input" placeholder="Where to ?" name=""></input><a href="/" class="search-icon"><button onClick= {(e)=>searchCity(e)} className='search-btn'>search</button></a></div>
                 </div>
             </div>
         </div>
@@ -154,6 +169,7 @@ export default function Home (){
                       <div class="box">
                         <div class="content">
                           <h4>{element.name}</h4>
+                          {decode()}
                         {/* <button className='btn' onClick={(e) =>{deleteCountry(e,element._id)}}>Delete</button>
                         <button className='btn' onClick={(e) => {editCountry(element)}}>Edit</button> */}
                           <Link on to={{ pathname: `/City/${element._id}`,data: {element}}}>
@@ -173,6 +189,7 @@ export default function Home (){
                 <br/><button className='btn' type="submit" 
                 onClick= {(e)=>addCountry(e)}>Add</button><br/><br/>
           </form> */}
+          {decode1()}
 
           {(function(){
             if (enableEdit == true){

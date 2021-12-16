@@ -7,6 +7,9 @@ const bcrypt = require('bcrypt')
 
 const userSchema = new Schema({
 
+    name: {type: String,
+        required: [true, "please enter a name"]},
+
     email: { 
         type: String,
         required: [true, "please enter an email"], 
@@ -16,7 +19,9 @@ const userSchema = new Schema({
      },
     password: { 
         type: String, 
-        required: [true, "please enter an password"]},
+        required: [true, "please enter an password"],
+    minlength: [6, "enter more than 6"]
+    },
     typeOfUser: {
         type: String,
         enum: ['user','admin'],

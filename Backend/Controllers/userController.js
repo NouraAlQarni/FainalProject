@@ -34,19 +34,19 @@ const handleErrors = (err) => {
 }
 
 const maxAge = 3 * 24 * 60 *60 ;
-const createToken = (id) => {
-    return jwt.sign({id}, 'noura secret', {
+const createToken = (id,email,name,typeOfUser) => {
+    return jwt.sign({id,email,name,typeOfUser}, 'noura secret', {
         expiresIn: maxAge
     })
 }
 
 module.exports.signup_post = async (request,response) => {
-    const {email, password , typeOfUser} = request.body;
+    const {email, password, typeOfUser, name} = request.body;
    try {
-      const user = await  User.create({email, password, typeOfUser})
-      const token = createToken(user._id)
+      const user = await  User.create({email, password, typeOfUser, name})
+      const token = createToken(user._id,user.email,user.name,user.typeOfUser)
       response.cookie('jwt', token, {httpOnly: true, maxAge: maxAge *1000 })
-      response.status(201).json({user: user._id,token:token})
+      response.status(201).json({user:token})
    }
    catch (err) {
       const errors = handleErrors(err);
@@ -56,12 +56,12 @@ module.exports.signup_post = async (request,response) => {
 }
 
 module.exports.login_post = async (request,response) => {
-    const {email, password ,typeOfUser} = request.body;
+    const {email, password} = request.body;
         try {
-            const user = await User.login(email,password,typeOfUser);
-            const token = createToken(user._id)
+            const user = await User.login(email,password);
+            const token = createToken(user._id,user.email,user.name,user.typeOfUser)
             response.cookie('jwt', token, {httpOnly: true, maxAge: maxAge *1000 })
-            response.status(200).json({user: user._id,token:token})
+            response.status(200).json({user: token})
 
         }
         catch (err) {

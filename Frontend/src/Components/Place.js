@@ -2,6 +2,7 @@ import { useParams } from "react-router"
 import { useState, useEffect } from "react";
 import axios  from 'axios';
 import {Link} from "react-router-dom";
+import jwt_decode from "jwt-decode";
 
 
 
@@ -9,9 +10,6 @@ export default function Place (){
     
     const {countryId,cityId} = useParams()
     const [place,setPlace] = useState([])
-    const [name,setName] = useState();
-    const [image,setImage] = useState();
-    const [location,setLocation] = useState();
     const [loading,setLoading] = useState(true)
 
     
@@ -54,12 +52,54 @@ export default function Place (){
     })
    }
 
-
   if (loading){
     return (
         <p>loading...</p>
     )
-}
+    }
+
+
+    
+  let decodedData ;
+  const storedToken = localStorage.getItem("token");
+  if (storedToken){
+      decodedData = jwt_decode(storedToken, { payload: true });
+      console.log(decodedData);
+      let expirationDate = decodedData.exp;
+      let current_time = Date.now() / 1000;
+      if(expirationDate < current_time)
+      {
+          localStorage.removeItem("token");
+      }
+ }
+
+  const decode = (id) => {
+    if (decodedData != undefined){
+      console.log(decodedData);
+          if ( decodedData.typeOfUser == "admin"){
+             return (
+                <div>
+                  <button className= "btn" onClick={(e) =>{deletePlace(e,id)}}>Delete</button>
+                </div>
+             )}
+          }
+        } 
+
+        const decode1 = (id) => {
+            if (decodedData != undefined){
+                  if (decodedData.typeOfUser == "admin"){
+                     return (           
+                        <form>
+                        <br/><br/><br/>
+                        <input  placeholder="Place :"></input><br/>
+                        <input  placeholder="Image :"></input><br/>
+                        <input  placeholder="location :"></input><br/>
+                        <br/><br/>
+                        <button className="btn" type="submit" onClick= {(e)=>addPlace(e)}>Add</button><br/><br/>
+                     </form>
+                   )}}} 
+
+
     return (
         
         <div className="Place">
@@ -71,7 +111,8 @@ export default function Place (){
                       <div class="box">
                         <div class="content">
                            <h4>{element.name}</h4>
-                           <button className="btn" onClick={(e) =>{deletePlace(e,element._id)}}>Delete</button>
+                           {decode()}
+                           {/* <button className="btn" onClick={(e) =>{deletePlace(e,element._id)}}>Delete</button> */}
                           <Link on to={{ pathname: `/PlaceDetails/${countryId}/${cityId}/${element._id}`,data: {element}}}>
                           <img className="card" src={element.image} height={230} width={370}></img>
                           </Link><br/>     
@@ -85,14 +126,15 @@ export default function Place (){
                  )
              })}
 
-             <form>
+             {/* <form>
                 <br/><br/><br/>
                 <input  placeholder="Place :"></input><br/>
                 <input  placeholder="Image :"></input><br/>
                 <input  placeholder="location :"></input><br/>
                 <br/><br/>
                 <button className="btn" type="submit" onClick= {(e)=>addPlace(e)}>Add</button><br/><br/>
-             </form>
+             </form> */}
+             {decode1()}
 
             <br/><br/>
         </div>
