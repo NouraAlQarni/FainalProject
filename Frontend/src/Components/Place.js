@@ -111,15 +111,15 @@ export default function Place (){
                       <div class="box">
                         <div class="content">
                            <h4>{element.name}</h4>
-                           {decode()}
+                           {decode(element._id)}
                            {/* <button className="btn" onClick={(e) =>{deletePlace(e,element._id)}}>Delete</button> */}
                           <Link on to={{ pathname: `/PlaceDetails/${countryId}/${cityId}/${element._id}`,data: {element}}}>
-                          <img className="card" src={element.image} height={230} width={370}></img>
+                          <img className="card" src={element.image} height={230} width={370}/>
                           </Link><br/>     
                         </div>
                      </div>
                     </div>
-                        <br/><p>{element.location}</p>
+                        <br/>
                         <br/>
                        
                     </div>

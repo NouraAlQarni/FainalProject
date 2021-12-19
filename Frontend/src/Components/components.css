@@ -58,11 +58,11 @@ a {
     margin: 10px;
 }
 
-.City{
+.City, .Place{
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin-left: 110px;
-    gap: 30px;
+    
 }
 
 .me-1{
@@ -99,13 +99,18 @@ form {
    margin-left: 170px;   
 }
 
-.form-control{
-    position:relative;
+.comment{
+display: flex;
+flex-direction: row;
+align-items: center;
+}
+
+.form-control {
+    position: relative;
 }
 
 .send{
     position: absolute;
-    top: 62%;
-    left: 90%;
+    left: 93%;
 }
   

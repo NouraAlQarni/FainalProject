@@ -20,7 +20,7 @@ export default function Home (){
   const [image,setImage] = useState();
   const [enableEdit,setEnabeEdit] = useState(false)
   const [idEdit,setIdEdit] = useState()
-  const {more} = useParams()
+  
 
   let navigate = useNavigate();
 
@@ -66,10 +66,18 @@ export default function Home (){
 
   const searchCity = (e) => {
     e.preventDefault()
-    axios.get(`http://localhost:3001/city/getCity/${search}`)
+    let result = {};
+	 Country.forEach(country => country.cities.filter(city => {
+		if(city.name == search){
+			result = country
+		}
+	}))
+    console.log(result._id);
+    console.log(result._id);
+    axios.get(`http://localhost:3001/city/getCity/${result._id}/${search}`)
     .then((response) => {
       console.log(response.data);
-      navigate(`/Place/${response.data}`)
+      navigate(`/Place/${result._id}/${response.data}`)
      })
     }
  
@@ -116,7 +124,7 @@ export default function Home (){
       const decode = (id) => {
         if (decodedData != undefined){
           console.log(decodedData);
-              if ( decodedData.typeOfUser == "admin"){
+              if ( decodedData.typeOfUser == "admin" ){
                  return (
                     <div>
                         <button className='btn' onClick={(e) =>{deleteCountry(e,id)}}>Delete</button>
@@ -174,7 +182,7 @@ export default function Home (){
                       <div class="box">
                         <div class="content">
                           <h4>{element.name}</h4>
-                          {decode()}
+                          {decode(element._id)}
                         {/* <button className='btn' onClick={(e) =>{deleteCountry(e,element._id)}}>Delete</button>
                         <button className='btn' onClick={(e) => {editCountry(element)}}>Edit</button> */}
                           <Link on to={{ pathname: `/City/${element._id}`,data: {element}}}>

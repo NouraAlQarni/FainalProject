@@ -7,7 +7,7 @@ import { TiDelete } from 'react-icons/ti';
 
 export default function PlaceDetails (){
 
-    const {countryId,cityId,placeId} = useParams()
+    const {countryId,cityId,placeId,userId} = useParams()
     const [comment,setComment] = useState([]);
     const [commentBody,setCommentBody] = useState();
     const [loading,setLoading] = useState(true);
@@ -41,7 +41,7 @@ export default function PlaceDetails (){
                     idCountry: countryId,
                     idCity: cityId,
                     idplace: placeId,
-                    iduser: "61b0a766fbac4fc92dca35f7"
+                    iduser: userId
                     } 
               ).then(
                 (response) => {
@@ -73,18 +73,19 @@ export default function PlaceDetails (){
         <div className="PlaceDetails">
             <div class="card text-center col-5 mx-auto m-3">
                 <div class="card-header">
-                    <img className="card" src={detail.image} height={230} width={370}></img></div>
+                    <img className="card" src={detail.image} height={230} width={370}/></div>
                     <div class="card-body">
                         <h4>{detail.name}</h4>
-                        <br/><p>{detail.location}</p>
+                        <br/>
                     </div>
+                    <div className="comment">
                     <textarea class="form-control z-depth-1" rows="2" placeholder="Write comment ..." onChange={(e)=>{setCommentBody(e.target.value)}}></textarea>
-                     <BiSend onClick={(e)=>addComment(e)} className="send"/>
+                     <BiSend onClick={(e)=>addComment(e)} className="send"/></div>
                         {comment?.map((element)=>{
                             console.log(element)
                          return (
                             <div>
-                                <p>{element.commentBody}</p>     
+                                <p>{element.name}{element.commentBody}</p>     
                                 <TiDelete onClick={(e)=>deleteComment(e,element._id)}/>
                             </div>)})}
             </div>
