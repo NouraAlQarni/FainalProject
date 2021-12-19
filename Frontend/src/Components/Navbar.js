@@ -10,7 +10,7 @@ import logo1 from './logo1.png'
 import City from './City';
 import Place from './Place';
 import PlaceDetails from './PlaceDetails';
-
+import { FiLogIn, FiLogOut } from 'react-icons/fi';
 
 export default function Navbar (){
 
@@ -52,8 +52,8 @@ export default function Navbar (){
         </li>
       </ul>
       <form class="d-flex">
-        <Link to="/Login"><button className = 'btn'>Login</button></Link>
-        <Link to="/Logout"><button className = 'btn' onClick= {(e)=> logout(e)}>Logout</button></Link> 
+        <Link to="/Login"><FiLogIn />login</Link>
+        <Link to="/Logout"><FiLogOut onClick= {(e)=> logout(e)}/>Logout</Link> 
       </form>
     </div>
   </div>

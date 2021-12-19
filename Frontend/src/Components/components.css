@@ -1,5 +1,5 @@
 * {
-  font-family: 'Cairo', sans-serif;
+    font-family: 'Source Code Pro', monospace;
 
 }
 
@@ -26,18 +26,16 @@
 }
 
 .Navbar , h4 {  
-    color: #6d23b6 !important;
     text-align: center !important;
     font-size: 22px; 
 }
 
 h1 , h3 {
-    color: #6d23b6 !important;
     text-align: center !important;
 }
 
 a {
-    color: #6d23b6 !important; 
+    color: black !important;
     font-size: 18px; 
 }
 
@@ -56,7 +54,6 @@ a {
 .Footer {
     font-size: 18px;
     font-weight: bold;
-    color: #6d23b6 !important;
     text-align: center !important;
     margin: 10px;
 }
@@ -100,5 +97,15 @@ form {
 
 .SignUp {
    margin-left: 170px;   
+}
+
+.form-control{
+    position:relative;
+}
+
+.send{
+    position: absolute;
+    top: 62%;
+    left: 90%;
 }
   

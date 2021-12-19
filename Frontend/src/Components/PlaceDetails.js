@@ -1,6 +1,8 @@
 import { useParams } from "react-router"
 import { useState, useEffect } from "react";
 import axios  from 'axios';
+import { BiSend } from 'react-icons/bi';
+import { TiDelete } from 'react-icons/ti';
 
 
 export default function PlaceDetails (){
@@ -56,13 +58,6 @@ export default function PlaceDetails (){
         e.preventDefault()
         console.log(_id)
         axios.delete(`http://localhost:3001/place/deleteComment/${countryId}/${cityId}/${placeId}/${_id}`
-        // ,{
-        //         commentBody: e.target.value,
-        //         // idCountry: countryId,
-        //         // idCity: cityId,
-        //         // idplace: placeId,
-        //         iduser: "61b0a766fbac4fc92dca35f7",       
-        // }
         ).then((response) => {
         console.log(" deleted", response)
         setDetail(response.data);
@@ -84,13 +79,13 @@ export default function PlaceDetails (){
                         <br/><p>{detail.location}</p>
                     </div>
                     <textarea class="form-control z-depth-1" rows="2" placeholder="Write comment ..." onChange={(e)=>{setCommentBody(e.target.value)}}></textarea>
-                     <button className="btn" onClick={(e)=>addComment(e)}>post</button><br/><br/>
+                     <BiSend onClick={(e)=>addComment(e)} className="send"/>
                         {comment?.map((element)=>{
                             console.log(element)
                          return (
                             <div>
                                 <p>{element.commentBody}</p>     
-                                <button className="btn" onClick={(e)=>deleteComment(e,element._id)}>Delete</button>
+                                <TiDelete onClick={(e)=>deleteComment(e,element._id)}/>
                             </div>)})}
             </div>
         </div>

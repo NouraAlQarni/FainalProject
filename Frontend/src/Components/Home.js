@@ -7,6 +7,8 @@ import img1 from "./images/slider-1.jpg"
 import img2 from "./images/slider-2.jpg"
 import img3 from "./images/slider-3.jpg"
 import jwt_decode from "jwt-decode";
+import { useNavigate } from 'react-router-dom';
+import { BiSearchAlt2 } from 'react-icons/bi';
 
 
 
@@ -18,7 +20,9 @@ export default function Home (){
   const [image,setImage] = useState();
   const [enableEdit,setEnabeEdit] = useState(false)
   const [idEdit,setIdEdit] = useState()
-  const {countryId,cityName} = useParams()
+  const {more} = useParams()
+
+  let navigate = useNavigate();
 
     
   useEffect (()=> {
@@ -62,10 +66,10 @@ export default function Home (){
 
   const searchCity = (e) => {
     e.preventDefault()
-    axios.get(`http://localhost:3001/city/getCity/${countryId}/${cityName}`)
+    axios.get(`http://localhost:3001/city/getCity/${search}`)
     .then((response) => {
       console.log(response.data);
-      setSearch(response.data);
+      navigate(`/Place/${response.data}`)
      })
     }
  
@@ -148,7 +152,8 @@ export default function Home (){
                 {/* <h3 class="heading mt-5 text-center">Find amazing things to do.<br/>Anytime, anywhere.</h3> */}
                 <div class="d-flex justify-content-center px-5">
                     <div class="search"> 
-                    <input type="text" class="search-input" placeholder="Where to ?" name=""></input><a href="/" class="search-icon"><button onClick= {(e)=>searchCity(e)} className='search-btn'>search</button></a></div>
+                    <input onChange={(e)=>{setSearch(e.target.value)}} type="text" class="search-input" placeholder="Where to ?" name=""></input>
+                    <a href="/" class="search-icon" onClick= {(e)=>searchCity(e)}><BiSearchAlt2/></a></div>
                 </div>
             </div>
         </div>
