@@ -121,14 +121,15 @@ export default function Home (){
           }
      }
 
-      const decode = (id) => {
+      const decode = (element) => {
         if (decodedData != undefined){
           console.log(decodedData);
               if ( decodedData.typeOfUser == "admin" ){
                  return (
                     <div>
-                        <button className='btn' onClick={(e) =>{deleteCountry(e,id)}}>Delete</button>
-                        <button className='btn' onClick={(e) => {editCountry(id)}}>Edit</button>
+                        <button className='btn' onClick={(e) =>{deleteCountry(e,element._id)}}>Delete</button>
+                        <button className='btn' onClick={(e) => {editCountry(element)}}>Edit</button>
+						
                     </div>
                  )}
               }
@@ -137,13 +138,28 @@ export default function Home (){
       const decode1 = (id) => {
         if (decodedData != undefined){
               if (decodedData.typeOfUser == "admin"){
-                 return (           
+                 return ( 
+					 <div>        
                     <form>
                     <input  placeholder="Country:"></input><br/>
                     <input  placeholder="image :"></input><br/>
                     <br/><button className='btn' type="submit" onClick= {(e)=>addCountry(e)}>Add</button><br/><br/>
                    </form>
-                        )}}} 
+				            {/* {(function(){
+								if (enableEdit == true){
+									return (
+					<div>
+					  <form>
+							<input value= {name} onChange= {(e)=>setName(e.target.value)} placeholder="Country :"></input><br/>
+							<input value= {image} onChange= {(e)=>setImage(e.target.value)} placeholder="image :"></input><br/>
+					   	<br/><br/><button className='btn' onClick={(e)=>{saveEditCountry(e)}} >save</button><br/><br/>
+					  </form>
+				       </div>
+					) }})()} */}
+						</div>
+            
+			)}
+		}} 
 
 
     return (
@@ -182,7 +198,7 @@ export default function Home (){
                       <div class="box">
                         <div class="content">
                           <h4>{element.name}</h4>
-                          {decode(element._id)}
+                          {decode(element)}
                         {/* <button className='btn' onClick={(e) =>{deleteCountry(e,element._id)}}>Delete</button>
                         <button className='btn' onClick={(e) => {editCountry(element)}}>Edit</button> */}
                           <Link on to={{ pathname: `/City/${element._id}`,data: {element}}}>

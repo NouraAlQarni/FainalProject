@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios  from 'axios';
 import { BiSend } from 'react-icons/bi';
 import { TiDelete } from 'react-icons/ti';
+import jwt_decode from "jwt-decode";
 
 
 export default function PlaceDetails (){
@@ -13,6 +14,30 @@ export default function PlaceDetails (){
     const [loading,setLoading] = useState(true);
     const [detail,setDetail] = useState()
 
+
+    let decodedData ;
+      const storedToken = localStorage.getItem("token");
+      if (storedToken){
+          decodedData = jwt_decode(storedToken, { payload: true });
+          console.log(decodedData);
+          let expirationDate = decodedData.exp;
+          let current_time = Date.now() / 1000;
+          if(expirationDate < current_time)
+          {
+              localStorage.removeItem("token");
+          }
+     }
+
+    //  const decode = (element) => {
+    //     if (decodedData != undefined){
+    //       console.log(decodedData);
+    //           if ( decodedData._id == ""){
+    //              return (
+    //                 <div>
+    //                 </div>
+    //              )}
+    //           }
+    //         } 
 
     // GET Specific Place
 
@@ -35,19 +60,18 @@ export default function PlaceDetails (){
         const addComment = (e) => {
             e.preventDefault()
             console.log(commentBody)
-            axios.post(`http://localhost:3001/place/createComment`, {
-                    
+            axios.post(`http://localhost:3001/place/createComment`, { 
                     commentBody: commentBody,
                     idCountry: countryId,
                     idCity: cityId,
                     idplace: placeId,
-                    iduser: userId
+                    iduser: decodedData.id
                     } 
               ).then(
                 (response) => {
                     console.log("Add", response.data);
-                    setDetail(response.data[0]);
-                    setComment(response.data[0].comments);
+                    setDetail(response.data.places[0]);
+                    setComment(response.data.result);
                     }
                 )
         }
@@ -73,7 +97,7 @@ export default function PlaceDetails (){
         <div className="PlaceDetails">
             <div class="card text-center col-5 mx-auto m-3">
                 <div class="card-header">
-                    <img className="card" src={detail.image} height={230} width={370}/></div>
+                    <img className="card" src={detail.image} height={330} width={500}/></div>
                     <div class="card-body">
                         <h4>{detail.name}</h4>
                         <br/>
@@ -85,10 +109,12 @@ export default function PlaceDetails (){
                             console.log(element)
                          return (
                             <div>
-                                <p>{element.name}{element.commentBody}</p>     
-                                <TiDelete onClick={(e)=>deleteComment(e,element._id)}/>
+                                <p>{element.user.name} :<br/>{element.commentBody}</p>   
+                                <TiDelete onClick={(e)=>deleteComment(e,element._id)}/><hr/> 
                             </div>)})}
+                            <br/>
             </div>
+            <br/>
         </div>
     )
 }

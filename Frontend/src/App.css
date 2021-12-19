@@ -115,15 +115,11 @@ body .container .card .box .content {
 }
 
 .search-icon {
-  /* float: right;
- 
-  height: 80px;
-  width: 100px; */
   position: relative;
   display: flex;
   align-items: flex-start;
   flex-direction: row-reverse;
-  bottom: 25px ;
+  bottom: 10px ;
 }
 
 

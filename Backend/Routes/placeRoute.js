@@ -100,7 +100,11 @@ router.post ( '/createComment', async (request,response) => {
                 try {
               await country.save()
               response.status(201)
-              response.send(elem.places)
+              let places= elem.places.filter(e=>{if(e._id == request.body.idplace ){
+                  return e
+            } })
+              let result= await Comment.find({place:request.body.idplace}).populate('user')
+              response.send({places,result})
           }
           catch(e) {
               console.error(e)

@@ -100,14 +100,14 @@ export default function City (){
       }
  }
 
-  const decode = (id) => {
+  const decode = (element) => {
     if (decodedData != undefined){
       console.log(decodedData);
           if ( decodedData.typeOfUser == "admin"){
              return (
                 <div>
-                  <button className="btn" onClick={(e) =>{deleteCity(e,id)}}>Delete</button>
-                  <button className="btn" onClick={(e) =>{updateCity(id)}}>update</button>
+                  <button className="btn" onClick={(e) =>{deleteCity(e,element._id)}}>Delete</button>
+                  <button className="btn" onClick={(e) =>{updateCity(element)}}>update</button>
                 </div>
              )}
           }
@@ -124,16 +124,6 @@ export default function City (){
                     <br/><br/>
                     <button className="btn" type="submit" onClick= {(e)=>addCity(e)}>Add</button><br/><br/>
                     </form>
-                    
-                    {(function(){
-                      if (enableEdit == true){
-                          return ( 
-                      <form>
-                          <input value={name} onChange={(e)=>setName(e.target.value)} placeholder="City :"></input><br/>
-                          <input value={image} onChange={(e)=>setImage(e.target.value)} placeholder="image :"></input><br/>
-                          <br/><br/><button className='btn' onClick={(e)=>{saveEditCity(e)}} >save</button><br/><br/>
-                      </form>
-                      ) }})()}
                   </div> 
         )}}} 
 
@@ -146,7 +136,7 @@ export default function City (){
                       <div class="box">
                         <div class="content">
                         <h4>{element.name}</h4>
-                        {decode(element._id)}
+                        {decode(element)}
                         {/* <button className="btn" onClick={(e) =>{deleteCity(e,element._id)}}>Delete</button>
                         <button className="btn" onClick={(e) =>{updateCity(element)}}>update</button> */}
                         <Link on to={{ pathname: `/Place/${more}/${element._id}`,data: {element}}}>
@@ -168,7 +158,7 @@ export default function City (){
 
             {decode1()}
 
-            {/* {(function(){
+            {(function(){
             if (enableEdit == true){
                 return ( 
             <form>
@@ -176,7 +166,7 @@ export default function City (){
                  <input value={image} onChange={(e)=>setImage(e.target.value)} placeholder="image :"></input><br/>
                  <br/><br/><button className='btn' onClick={(e)=>{saveEditCity(e)}} >save</button><br/><br/>
             </form>
-            ) }})()} */}
+            ) }})()}
 
         </div>
     )
