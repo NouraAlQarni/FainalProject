@@ -20,10 +20,6 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -37,7 +33,6 @@ body {
   text-align: center;
   /* background: #f8f4f2; */
 }
-
 
 body .container {
   display: flex;
@@ -97,19 +92,18 @@ body .container .card .box .content {
   border: 0;
   outline: 0;
   background: none;
-  width: 0;
+  /* width: 0;
   margin-top: 5px;
   caret-color: transparent;
   line-height: 20px;
-  transition: width 0.4s linear
+  transition: width 0.4s linear */
 }
 
 .search .search-input {
   padding: 0 10px;
   width: 100%;
-  caret-color: #536bf6;
+  /* caret-color: #8090eb; */
   font-size: 19px;
-  font-weight: 300;
   color: black;
   transition: width 0.4s linear
 }
@@ -119,9 +113,8 @@ body .container .card .box .content {
   display: flex;
   align-items: flex-start;
   flex-direction: row-reverse;
-  bottom: 10px ;
+  bottom: 24px ;
 }
-
 
 a:link {
   text-decoration: none

@@ -1,70 +1,211 @@
-# Getting Started with Create React App
+# Dream Tourism	
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
 
-In the project directory, you can run:
+<img src="./src/Components/logo1.png" alt="logo" style="zoom:75%;" />
 
-### `npm start`
+<br/><br/>
+## Description
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+***Dream Tourism*** it's shows some countries and the most important cities in them 
+and the most famous places. 
+<br/>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+***DATABASE*** has been developed as a part of the final project in [mongooseDB]('mongodb+srv://NouraSaad:NNooorraaa123@cluster0.w35p9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority').
 
-### `npm test`
+<br/>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## User Stories
 
-### `npm run build`
+- **Signup:** As a user I can sign up in the platform so that I can start playing into competition
+- **Login:** As a user I can login to the platform so that I can log my exit points
+- **Logout:** As a user I can logout from the platform so no one else can use it
+- **Add Exit Points** As a user I can add an exit point
+- **Edit Exit Points** As a user I can edit an exit point
+- **Edit User** As a user I can edit my profile, add or substract exit points
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<br/>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Backlog
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Add profile
+- Add weather
+- add location
 
-### `npm run eject`
+<br/><br/>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+# Client / Frontend
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## React Router Routes (React App)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+| Path   | Component   | Permissions      | Behavior     |
+|--------|-------------|------------------|--------------|
+| `/`    | HomePage    | public `<Route>` |  HomePage    |
+|`/signup`| SignupPage | public `<Route>` | Signup form, link to login, navigate to homepage after signup|
+|`/login` | LoginPage  | public `<Route>` | Login form, navigate to homepage after login                 |
+|`/City/:Id`| CityPage | public `<Route>` | Add, Delete and Edit a City                                  |
+|`/Place/:countryId/:cityId` | PlacePage | public `<Route>` | Add and Delete a Places                 |
+|`/PlaceDetails/:countryId/:cityId/:placeId` | PlaceDetailsPage | public`<Route>` | Details of a Places  |
+|`/About` | AboutPage | public `<Route>` | Show description for the website.                 |
+|`/Contact`| ContactPage | public `<Route>` | Show contact way.                 |
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+<br/><br/>
 
-## Learn More
+## Components
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Login
+- SignUp
+- Home
+- Footer
+- Place
+- PlaceDetails
+- ContactUs
+- About
+- City
+- Navbar
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<br/><br/>
 
-### Code Splitting
+## Services
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- User Service
+  - login(user or admin)
+  - signup(user or admin)
+  - logout()
+  - addComment()
+  - deleteComment()
 
-### Analyzing the Bundle Size
+  <br/>
+- City Service
+  - getCity()
+  - addCity()
+  - deleteCity(id)
+  - updateCity(id)
+  - searchCity(id)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+  <br/>
+- Country Service
+  - getCountry()
+  - addCountry()
+  - deleteCountry(id)
+  - editCountry(id)
 
-### Making a Progressive Web App
+  <br/>
+- Place Service
+  - getPlace()
+  - addPlace()
+  - deletePlace(id)
+ 
+  <br/><br/>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+# Server / Backend
 
-### Advanced Configuration
+## Models
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+User model
 
-### Deployment
+```
+{
+  name: {type: String, required: true},
+  email: {type: String, required: true, unique: true, validate: [isEmail]},
+  password: {type: String, required: true, minlength: [6]},
+  typeOfUser: {type: String, enum: ['user','admin'], default: "user"}
+}
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+cities model
 
-### `npm run build` fails to minify
+```
+ {
+   name: {type: String},
+   image: {type: String},
+   places: [PlaceSchema] 
+ }
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+
+Countries model
+
+```
+ {
+   name: {type: String},
+   image: {type: String},
+   cities: [citySchema] 
+ }
+
+```
+Places model
+
+```
+ {
+   name: {type: String},
+   image: {type: String},
+   location: {type: String},
+   typeOfPlace: {type: String, enum:['Restaurant',"Hotel",'Place']},
+   comments: [{type: Schema.Types.ObjectId, ref: 'comment'}] 
+ }
+
+```
+
+ Comment model
+
+```
+ {
+   user:{type: Schema.Types.ObjectId, ref: 'user'},
+   place:{type: Schema.Types.ObjectId, ref: 'place'},
+   commentBody:{type: String }
+ }
+ ```
+ 
+
+ <br/><br/>
+
+
+
+## Backend routes
+
+|HTTP Method        | URL            | Request Body       | Description                     |  
+|----------| -------------------                     | ----------------------------- | --------------------------------- | 
+|  POST     |`/login`                                 | {email,password}              | Check if user is logged           |
+| POST     |`/signup`                                | {name, email, password}       | Creat user with encrypted password|
+| GET      |`/logout`                                |                               | Logs out the user                 |
+| GET      |`/country/getCity/:countryId/:cityId`    |                               | Used to get the cities            |            
+| GET      |`/city/getPlace/:countryId/:cityId/:placeId`|                            | Used to get the places            |
+| POST     |`/city/createPlace/:countryId/:cityId`   | {name, image, location}       | Used to create place              |
+| DELETE   |`/city/deletePlace/:countryId/:cityID/:placeID`|                         | Used to delete place              |
+| GET      |`/country/getCountry`                    |                               | Used to get the countries         |
+| GET      |`/country/getCountry/:id`                |                               | Used to get Specific Country      |
+| POST     |`/country/createCountry`                 | {name,image}                  | Used to create place              |
+| PATCH    |`/country/updateCountry/:id`             | {name,image}                  | Used to update current country    |
+| DELETE   |`/country/deleteCountry/:id`            |                               | Used to delete country            |
+| POST     |`/country/createCity/:id`                | {name,image}                  | Used to create city               |
+| DELETE   |`/country/deleteCity/:countryID/:cityID` |                               | Used to delete city               | 
+| PUT      |`/country/updateCity/:countryID/:cityID` | {name,image}                  | Used to update current city       |
+| GET      |`/place/getComment/:countryId/:cityId/:placeId`|                         | Used to get the comments          |
+| POST     |`/place/createComment`                   | {commentBody,user,place}      | Used to create comments           |
+| DELETE   |`/place/deleteComment/:idCountry/:idCity/:idplace/:commentID`|           | Used to delete comments           |
+
+<br/><br/>
+
+## Links :
+
+<br/>
+
+[Trello](https://trello.com/b/7bXFB6Mb/fainalproject)
+
+<br/>
+
+[GitHub](https://github.com/NouraAlQarni/FainalProject)
+
+<br/>
+
+[Deployed App Link](http://heroku.com/)
+
+<br/>
+
+[Slides Link](http://slides.com/)
+
+
+<br/>
+
+[Figma ](https://www.figma.com/file/LbVG4GVg9QdU370Feenadm/Dream-Tourism..)

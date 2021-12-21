@@ -32,27 +32,6 @@ router.get ( '/getCity/:countryId/:cityId', async (request,response) => {
 })
 
 
-// GET Specific City
-
-
-// router.get ( '/getCity/:cityId', async (request,response) => {
-//     const cityid = request.params.cityId
-//     try {
-//         const country = await Country.findById()
-//         country.cities.forEach((element)=>{
-//             if (element._id == cityid){
-//                 response.send(element._id)
-//             }
-//         }) 
-//     }
-//     catch(e) {
-//         response.status(500).send()
-//         console.error(e)
-//     };
-// })
-
-
-
 // GET Specific Place
 
 

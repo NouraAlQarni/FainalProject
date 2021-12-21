@@ -117,7 +117,7 @@ export default function City (){
           if (decodedData != undefined){
                 if (decodedData.typeOfUser == "admin"){
                    return (  
-                   <div>        
+                   <div><br/>        
                     <form>
                     <input  placeholder="City :"></input><br/>
                     <input  placeholder="Image :"></input><br/>
@@ -137,8 +137,6 @@ export default function City (){
                         <div class="content">
                         <h4>{element.name}</h4>
                         {decode(element)}
-                        {/* <button className="btn" onClick={(e) =>{deleteCity(e,element._id)}}>Delete</button>
-                        <button className="btn" onClick={(e) =>{updateCity(element)}}>update</button> */}
                         <Link on to={{ pathname: `/Place/${more}/${element._id}`,data: {element}}}>
                           <img className="card" src={element.image} height={230} width={370}></img>
                         </Link><br/>
@@ -148,13 +146,6 @@ export default function City (){
                     </div> 
                  )
              })}
-
-             {/* <form>
-                <input  placeholder="City :"></input><br/>
-                <input  placeholder="Image :"></input><br/>
-                <br/><br/>
-                <button className="btn" type="submit" onClick= {(e)=>addCity(e)}>Add</button><br/><br/>
-            </form> */}
 
             {decode1()}
 

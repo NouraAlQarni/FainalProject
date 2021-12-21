@@ -133,33 +133,21 @@ export default function Home (){
                     </div>
                  )}
               }
-            } 
+            }
+
             
       const decode1 = (id) => {
         if (decodedData != undefined){
               if (decodedData.typeOfUser == "admin"){
                  return ( 
-					 <div>        
+					         <div>        
                     <form>
                     <input  placeholder="Country:"></input><br/>
                     <input  placeholder="image :"></input><br/>
                     <br/><button className='btn' type="submit" onClick= {(e)=>addCountry(e)}>Add</button><br/><br/>
                    </form>
-				            {/* {(function(){
-								if (enableEdit == true){
-									return (
-					<div>
-					  <form>
-							<input value= {name} onChange= {(e)=>setName(e.target.value)} placeholder="Country :"></input><br/>
-							<input value= {image} onChange= {(e)=>setImage(e.target.value)} placeholder="image :"></input><br/>
-					   	<br/><br/><button className='btn' onClick={(e)=>{saveEditCountry(e)}} >save</button><br/><br/>
-					  </form>
-				       </div>
-					) }})()} */}
-						</div>
-            
-			)}
-		}} 
+					        </div>        
+		      	)}}} 
 
 
     return (
@@ -173,7 +161,6 @@ export default function Home (){
     <div class="row d-flex justify-content-center">
         <div class="col-md-9">
             <div class="card1 p-4 mt-3">
-                {/* <h3 class="heading mt-5 text-center">Find amazing things to do.<br/>Anytime, anywhere.</h3> */}
                 <div class="d-flex justify-content-center px-5">
                     <div class="search"> 
                     <input onChange={(e)=>{setSearch(e.target.value)}} type="text" class="search-input" placeholder="Where to ?" name=""></input>
@@ -183,7 +170,6 @@ export default function Home (){
         </div>
     </div>
 </div>
-      {/* <input class="form-control me-1" type="search" placeholder="Where to ?" aria-label="Search"></input><button class="btn btn-outline-success" type="submit">Search</button> */}
         </div>
     </div>
   </div>
@@ -234,7 +220,7 @@ export default function Home (){
    <br/><br/><br/>
     </div>
 
-  <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+  {/* <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -269,7 +255,7 @@ export default function Home (){
     <span class="visually-hidden">Next</span>
   </button>
   
-</div>
+</div> */}
 <br/><br/><br/>
 
       </div>

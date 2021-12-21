@@ -109,7 +109,7 @@ export default function PlaceDetails (){
                             console.log(element)
                          return (
                             <div>
-                                <p>{element.user.name} :<br/>{element.commentBody}</p>   
+                                <p>{element.user.name} :{element.commentBody}</p>   
                                 <TiDelete onClick={(e)=>deleteComment(e,element._id)}/><hr/> 
                             </div>)})}
                             <br/>

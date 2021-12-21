@@ -32,6 +32,7 @@
 
 h1 , h3 {
     text-align: center !important;
+    color: black !important;
 }
 
 a {
@@ -61,8 +62,7 @@ a {
 .City, .Place{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    margin-left: 110px;
-    
+    margin-left: 110px;   
 }
 
 .me-1{
@@ -82,11 +82,13 @@ form {
     color: white;
     border: 1px solid transparent;
     border-radius: 0.25rem;
+   margin-left: 5px;
  }
    
  .shadow-textarea textarea.form-control::placeholder {
     font-weight: 300;
 }
+
 .shadow-textarea textarea.form-control {
     padding-left: 0.8rem;
 } 
@@ -112,5 +114,9 @@ align-items: center;
 .send{
     position: absolute;
     left: 93%;
+}
+
+.form-label{
+    font-weight: bold;
 }
   

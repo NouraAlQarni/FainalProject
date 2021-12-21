@@ -44,7 +44,7 @@ export default function SignUp (){
     return (
 
     <div className="SignUp">
-    {console.log("hi"+typeOfUser)}
+     {console.log(typeOfUser)}
         <div class="col-md-10"><br/> 
         <div class="row justify-content-center">
         <div class="col-md-6">
@@ -53,14 +53,12 @@ export default function SignUp (){
             <div class="col-md-5">                  
                  <div class="modal-body">
                      <div class="mb-3">
-                     <label for="exampleInputEmail1" class="form-label">Name</label>
-                    <input onChange = {(e)=> {setName(e.target.value)}} type="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></input>
-                    <label for="exampleInputEmail1" class="form-label">Email</label>
-                    <input onChange = {(e)=> {setEmail(e.target.value)}} type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></input>
-                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input onChange = {(e)=> {setPassword(e.target.value)}} type="password" class="form-control" id="exampleInputPassword1"></input> <br/>
+                    <label for="exampleInputEmail1" class="form-label">SignUp</label><br/><br/>
+                    <input placeholder="Name" onChange = {(e)=> {setName(e.target.value)}} type="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></input><br/>
+                    <input placeholder="Email" onChange = {(e)=> {setEmail(e.target.value)}} type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></input><br/>
+                    <input placeholder="Password" onChange = {(e)=> {setPassword(e.target.value)}} type="password" class="form-control" id="exampleInputPassword1"></input> <br/>
                     <input onChange = {(e)=> {setTypeOfUser("admin")}} type="radio" id="admin" name="signup" value="admin"></input>
-                    <label for="admin">admin</label> <br/>
+                    <label for="admin">admin</label><br/>
                     <input onChange = {(e)=> {setTypeOfUser("user")}} type="radio" id="user" name="signup" value="user"></input>
                     <label for="user">user</label>
                 </div>

@@ -16,22 +16,20 @@ const handleErrors = (err) => {
         errors.password = 'that password is not registered';
     }
 
-
     if (err.code === 11000){
         errors.email = "that email is already registered"
         return errors;
-    
-        };
+    };
 
-        if (err.message.includes('user validation faild')){
+    if (err.message.includes('user validation faild')){
         Object.values(err.errors).forEach(({properties}) => {
             console.log(properties);
             errors[properties.path] = properties.message;
         })
-    
     }
     return errors;
 }
+
 
 const maxAge = 3 * 24 * 60 *60 ;
 const createToken = (id,email,name,typeOfUser) => {
@@ -39,6 +37,7 @@ const createToken = (id,email,name,typeOfUser) => {
         expiresIn: maxAge
     })
 }
+
 
 module.exports.signup_post = async (request,response) => {
     const {email, password, typeOfUser, name} = request.body;
@@ -55,6 +54,7 @@ module.exports.signup_post = async (request,response) => {
    }
 }
 
+
 module.exports.login_post = async (request,response) => {
     const {email, password} = request.body;
         try {
@@ -62,13 +62,14 @@ module.exports.login_post = async (request,response) => {
             const token = createToken(user._id,user.email,user.name,user.typeOfUser)
             response.cookie('jwt', token, {httpOnly: true, maxAge: maxAge *1000 })
             response.status(200).json({user: token})
-
         }
         catch (err) {
             const errors = handleErrors(err);
             response.status(400).json({errors});
         }
 }
+
+
 
 module.exports.logout_get = (request,response) => {
     response.cookie('jwt','',{maxAge: 1});
