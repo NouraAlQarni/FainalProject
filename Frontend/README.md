@@ -2,27 +2,35 @@
 
 
 
-<img src="./src/Components/logo1.png" alt="logo" style="zoom:75%;" />
+<img src="./src/Components/logo1.png" alt="logo" style="zoom:60%;"/>
 
 <br/><br/>
 ## Description
 
-***Dream Tourism*** it's shows some countries and the most important cities in them 
-and the most famous places. 
+***Dream Tourism*** 
+<br/>
+Website that lists the top visited countries around the globe, the top visited cities, and the most popular locations within a country, allowing users to leave comments and share their opinions.
 <br/>
 
-***DATABASE*** has been developed as a part of the final project in [mongooseDB]('mongodb+srv://NouraSaad:NNooorraaa123@cluster0.w35p9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority').
+
+***DATABASE*** 
+<br/>
+has been developed as a part of the final project in [mongooseDB]('mongodb+srv://NouraSaad:NNooorraaa123@cluster0.w35p9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority').
 
 <br/>
 
 ## User Stories
 
-- **Signup:** As a user I can sign up in the platform so that I can start playing into competition
-- **Login:** As a user I can login to the platform so that I can log my exit points
-- **Logout:** As a user I can logout from the platform so no one else can use it
-- **Add Exit Points** As a user I can add an exit point
-- **Edit Exit Points** As a user I can edit an exit point
-- **Edit User** As a user I can edit my profile, add or substract exit points
+- **Signup:**  As a user and I can sign up.
+- **Signup:**  As a admin and I can sign up.
+- **Login:**  As a user I can login.
+- **Login:**  As a admin I can login.
+- **Logout:**  As a user I can logout from the Website.
+- **Add**  As a admin I can add a countries, cities and places.
+- **Add**  As a user I can add a comments.
+- **Edit**  As a admin I can edit a countries and cities.
+- **Delete**  As a user I can delete my comments.
+- **Delete**  As a admin I can delete countries, cities and places.
 
 <br/>
 
@@ -30,7 +38,7 @@ and the most famous places.
 
 - Add profile
 - Add weather
-- add location
+- Add location
 
 <br/><br/>
 
@@ -45,7 +53,7 @@ and the most famous places.
 |`/login` | LoginPage  | public `<Route>` | Login form, navigate to homepage after login                 |
 |`/City/:Id`| CityPage | public `<Route>` | Add, Delete and Edit a City                                  |
 |`/Place/:countryId/:cityId` | PlacePage | public `<Route>` | Add and Delete a Places                 |
-|`/PlaceDetails/:countryId/:cityId/:placeId` | PlaceDetailsPage | public`<Route>` | Details of a Places  |
+|`/PlaceDetails/:countryId/:cityId/:placeId` | PlaceDetailsPage | public `<Route>` | Details of a Places  |
 |`/About` | AboutPage | public `<Route>` | Show description for the website.                 |
 |`/Contact`| ContactPage | public `<Route>` | Show contact way.                 |
 
@@ -102,7 +110,7 @@ and the most famous places.
 
 ## Models
 
-User model
+User model:
 
 ```
 {
@@ -113,7 +121,7 @@ User model
 }
 ```
 
-cities model
+cities model:
 
 ```
  {
@@ -124,7 +132,7 @@ cities model
 
 ```
 
-Countries model
+Countries model:
 
 ```
  {
@@ -134,7 +142,7 @@ Countries model
  }
 
 ```
-Places model
+Places model:
 
 ```
  {
@@ -147,7 +155,7 @@ Places model
 
 ```
 
- Comment model
+ Comment model:
 
 ```
  {
@@ -203,7 +211,7 @@ Places model
 
 <br/>
 
-[Slides Link](http://slides.com/)
+[Slides](https://docs.google.com/presentation/d/1LGAZSvrz6LJBe1ENxy9IAnEQXdjp0-6OvJFAcdt7Ohg/edit?usp=sharing)
 
 
 <br/>
