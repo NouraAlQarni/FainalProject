@@ -2,7 +2,7 @@
 
 
 
-<img src="./src/Components/logo1.png" alt="logo" style="zoom:60%;"/>
+<img src="./Frontend/src/Components/logo1.png" alt="logo" style="zoom:60%;"/>
 
 <br/><br/>
 ## Description

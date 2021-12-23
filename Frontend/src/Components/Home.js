@@ -107,6 +107,7 @@ export default function Home (){
             });
             setEnabeEdit(false)
       }
+      
 
       let decodedData ;
       const storedToken = localStorage.getItem("token");
