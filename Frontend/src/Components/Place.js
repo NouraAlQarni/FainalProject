@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import axios  from 'axios';
 import {Link} from "react-router-dom";
 import jwt_decode from "jwt-decode";
+import { AiFillEdit } from 'react-icons/ai';
+import { MdDeleteForever } from 'react-icons/md';
 
 
 
@@ -79,7 +81,7 @@ export default function Place (){
           if ( decodedData.typeOfUser == "admin"){
              return (
                 <div>
-                  <button className= "btn" onClick={(e) =>{deletePlace(e,id)}}>Delete</button>
+                   <MdDeleteForever onClick={(e) =>{deletePlace(e,id)}}/>
                 </div>
              )}
           }
@@ -100,10 +102,10 @@ export default function Place (){
                    )}}} 
 
 
-    return (
-        
+    return (      
+      <div>
+      <br/><br/><h3>Top Place</h3>
         <div className="Place">
-
             {place.map((element)=>{
                  return (
                  <div class="container"><br/><br/><br/>
@@ -112,7 +114,6 @@ export default function Place (){
                         <div class="content">
                            <h4>{element.name}</h4>
                            {decode(element._id)}
-                           {/* <button className="btn" onClick={(e) =>{deletePlace(e,element._id)}}>Delete</button> */}
                           <Link on to={{ pathname: `/PlaceDetails/${countryId}/${cityId}/${element._id}`,data: {element}}}>
                           <img className="card" src={element.image} height={230} width={370}/>
                           </Link><br/>     
@@ -120,23 +121,13 @@ export default function Place (){
                      </div>
                     </div>
                         <br/>
-                        <br/>
-                       
+                        <br/>    
                     </div>
                  )
              })}
-
-             {/* <form>
-                <br/><br/><br/>
-                <input  placeholder="Place :"></input><br/>
-                <input  placeholder="Image :"></input><br/>
-                <input  placeholder="location :"></input><br/>
-                <br/><br/>
-                <button className="btn" type="submit" onClick= {(e)=>addPlace(e)}>Add</button><br/><br/>
-             </form> */}
              {decode1()}
-
             <br/><br/>
+        </div>
         </div>
 
     )}

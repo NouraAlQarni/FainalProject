@@ -10,7 +10,8 @@ import logo1 from './logo1.png'
 import City from './City';
 import Place from './Place';
 import PlaceDetails from './PlaceDetails';
-import { FiLogIn, FiLogOut } from 'react-icons/fi';
+import { FiUser } from 'react-icons/fi';
+import jwt_decode from "jwt-decode";
 
 export default function Navbar (){
 
@@ -21,16 +22,22 @@ export default function Navbar (){
       e.preventDefault();
       localStorage.removeItem("token");
       navigate ('/')
-      alert("LogedOut")
   }
+
+  let decodedData ;
+  const storedToken = localStorage.getItem("token");
+  if (storedToken){
+      decodedData = jwt_decode(storedToken, { payload: true });
+      console.log(decodedData);
+ }
 
     return (
         <div className="Navbar">
 
-<Bootstrap.Nav class="navbar navbar-expand-lg ">
+<Bootstrap.Nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
     <a class="navbar-brand" href="/">
-      <img  src={logo1} alt="" width="85" height="85" class="d-inline-block align-text-top"></img>
+      <img  src={logo1} alt="" width="65" height="65" class="d-inline-block align-text-top"></img>
       <h5>Dream</h5> 
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,13 +54,19 @@ export default function Navbar (){
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="Contact">ContactUs</a>
         </li>
-        <li class="nav-item">
- 
-        </li>
       </ul>
       <form class="d-flex">
-        <Link to="/Login"><FiLogIn />login</Link>
-        <Link to="/Logout"><FiLogOut onClick= {(e)=> logout(e)}/>Logout</Link> 
+      {!decodedData? ( 
+        <>
+              <Link to="/Login"><FiUser/> Account</Link>
+        </>
+      ): null}
+
+      {decodedData ? (
+        <>
+        <Link to="/Logout"><a onClick= {(e)=> logout(e)}>logout</a></Link> 
+        </>
+      ) : null}
       </form>
     </div>
   </div>

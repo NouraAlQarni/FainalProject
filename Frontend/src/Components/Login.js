@@ -32,11 +32,10 @@ export default function Login (){
                 console.log(userSign);
                 localStorage.setItem('token',token);
                 navigate("/")
-                alert("Login successfully")
             }
-
            });
     }
+
     return (
     <div className="Login">
         <div class="col-md-10"><br/> 
@@ -54,9 +53,9 @@ export default function Login (){
                             <input placeholder="Password" onChange = {(e)=> {setPassword(e.target.value)}}  type="password" class="form-control" id="exampleInputPassword1"></input><br/>
                             <small>Don't have an account? 
                             <Link on to={{ pathname: `/SignUp` }}>
-                                        <h5 className="d-inline text-primary">SignUp</h5></Link></small>
+                                <h5 className="d-inline text-primary">SignUp</h5></Link></small>
                         </div>
-                        </div>
+                    </div>
                         <button type="submit" class="btn btn-primary" onClick = {(e)=>{login(e)}}>Login</button>
                     </div>
                     </div>

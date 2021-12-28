@@ -94,6 +94,9 @@ export default function PlaceDetails (){
     }
 
     return (
+
+        <>
+         <br/><br/><h3>Place Details</h3><br/><br/>
         <div className="PlaceDetails">
             <div class="card text-center col-5 mx-auto m-3">
                 <div class="card-header">
@@ -116,5 +119,6 @@ export default function PlaceDetails (){
             </div>
             <br/>
         </div>
+        </>
     )
 }

@@ -3,12 +3,18 @@ import axios  from 'axios';
 import { useEffect, useState } from "react";
 import { useParams } from "react-router"
 import {Link} from "react-router-dom";
-import img1 from "./images/slider-1.jpg"
-import img2 from "./images/slider-2.jpg"
-import img3 from "./images/slider-3.jpg"
+import img1 from "./images/sea1.jpg"
+import img2 from "./images/sea2.jpg"
+import img3 from "./images/sea3.jpg"
+import img4 from "./images/sea4.jpg"
 import jwt_decode from "jwt-decode";
 import { useNavigate } from 'react-router-dom';
 import { BiSearchAlt2 } from 'react-icons/bi';
+import { AiFillEdit } from 'react-icons/ai';
+import { MdDeleteForever } from 'react-icons/md';
+
+
+
 
 
 
@@ -128,9 +134,8 @@ export default function Home (){
               if ( decodedData.typeOfUser == "admin" ){
                  return (
                     <div>
-                        <button className='btn' onClick={(e) =>{deleteCountry(e,element._id)}}>Delete</button>
-                        <button className='btn' onClick={(e) => {editCountry(element)}}>Edit</button>
-						
+                      <MdDeleteForever onClick={(e) =>{deleteCountry(e,element._id)}}/>
+                      <AiFillEdit  onClick={(e) => {editCountry(element)}}/>
                     </div>
                  )}
               }
@@ -142,10 +147,10 @@ export default function Home (){
               if (decodedData.typeOfUser == "admin"){
                  return ( 
 					         <div>        
-                    <form>
-                    <input  placeholder="Country:"></input><br/>
-                    <input  placeholder="image :"></input><br/>
-                    <br/><button className='btn' type="submit" onClick= {(e)=>addCountry(e)}>Add</button><br/><br/>
+                    <form className='Add'>
+                    <input  placeholder="Country"></input><br/>
+                    <input  placeholder="image"></input><br/>
+                    <br/><button className='btn' type="submit" onClick= {(e)=>addCountry(e)}>add</button><br/>
                    </form>
 					        </div>        
 		      	)}}} 
@@ -186,8 +191,6 @@ export default function Home (){
                         <div class="content">
                           <h4>{element.name}</h4>
                           {decode(element)}
-                        {/* <button className='btn' onClick={(e) =>{deleteCountry(e,element._id)}}>Delete</button>
-                        <button className='btn' onClick={(e) => {editCountry(element)}}>Edit</button> */}
                           <Link on to={{ pathname: `/City/${element._id}`,data: {element}}}>
                                     <img className="card" src={element.image} height={230} width={370}></img>
                           </Link>
@@ -198,13 +201,6 @@ export default function Home (){
                   )})}
 
     <br/><br/> 
-  
-          {/* <form>
-                <input  placeholder="Country:"></input><br/>
-                <input  placeholder="image :"></input><br/>
-                <br/><button className='btn' type="submit" 
-                onClick= {(e)=>addCountry(e)}>Add</button><br/><br/>
-          </form> */}
           {decode1()}
 
           {(function(){
@@ -212,54 +208,44 @@ export default function Home (){
                 return (
                     <div>
                       <form>
-                            <input value= {name} onChange= {(e)=>setName(e.target.value)} placeholder="Country :"></input><br/>
-                            <input value= {image} onChange= {(e)=>setImage(e.target.value)} placeholder="image :"></input><br/>
-                            <br/><br/><button className='btn' onClick={(e)=>{saveEditCountry(e)}} >save</button><br/><br/>
+                            <input value= {name} onChange= {(e)=>setName(e.target.value)} placeholder="Country"></input><br/>
+                            <input value= {image} onChange= {(e)=>setImage(e.target.value)} placeholder="image"></input><br/>
+                            <br/><button className='btn' onClick={(e)=>{saveEditCountry(e)}}>save</button><br/><br/>
                       </form>
                 </div>
                 ) }})()}
    <br/><br/><br/>
     </div>
 
-  {/* <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src = {img1} height = {480} width = {1600} ></img>
-      <div class="carousel-caption d-none d-md-block">
-        <h2>Travel Exploration</h2>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <img src = {img2} height = {480} width = {1600} ></img>
-      <div class="carousel-caption d-none d-md-block">
-        <h2>Dream Destination</h2>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <img src = {img3} height = {480} width = {1600} ></img>
-      <div class="carousel-caption d-none d-md-block">
-        <h2>Discover New Places</h2>
-      </div>
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-  
-</div> */}
-<br/><br/><br/>
+    
+    <br/><br/><h3 className="beach">Top destinations for beach lovers</h3><br/>
+      <div className='immg1'>
+        
+        <div className='immg'>
+        <img  className='imgBottom' src={img1} height="310px" width="280px"></img>
+        </div>
+        <div class="bottom-left">Tulum,Mexico</div>
 
+        <div className='immg'>
+        <img className='imgBottom' src={img2} height="310px" width="280px"></img> 
+        </div>
+        <div class="bottom-left3">Myrtle Beach,SC</div> 
+
+
+        <div className='immg'>
+        <img  className='imgBottom' src={img3} height="310px" width="280px"></img> 
+        </div>
+        <div class="bottom-left2">Hawaii</div> 
+
+        <div className='immg'>
+        <img  className='imgBottom' src={img4} height="310px" width="280px"></img>
+        </div> 
+        <div class="bottom-left1">Bora Bora, French Polynesia</div> 
+      
       </div>
+      
+      
+   <br/><br/><br/>
+    </div>
 )
-
 }

@@ -34,11 +34,9 @@ export default function SignUp (){
                     console.log(token);
                     console.log(response.data.user);
                 }
-                // setUser(response.data)
                 navigate("/")
             }
             )
-  
     }
 
     return (

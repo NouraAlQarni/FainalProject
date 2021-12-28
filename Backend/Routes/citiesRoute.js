@@ -108,7 +108,7 @@ router.get ( '/getCity/:countryId/:cityId', async (request,response) => {
                   await country.save()
                   response.status(201)
                   response.send(elem.places)
-              }
+                        }
               catch(e) {
                   console.error(e)
               }

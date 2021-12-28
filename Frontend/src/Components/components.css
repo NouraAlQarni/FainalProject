@@ -1,6 +1,5 @@
 * {
     font-family: 'Source Code Pro', monospace;
-
 }
 
 .navbar-brand {
@@ -14,8 +13,9 @@
 
 .About {
   position:relative;
-   opacity: 0.2;
+   opacity: 0.6;
 }
+
 .disply {
     position: absolute;
     top: 80%;
@@ -26,13 +26,12 @@
 }
 
 .Navbar , h4 {  
-    text-align: center !important;
     font-size: 22px; 
 }
 
 h1 , h3 {
-    text-align: center !important;
     color: black !important;
+    font-weight: bold;
 }
 
 a {
@@ -78,11 +77,11 @@ form {
 }
   
 .btn {
-    background-color: #6d23b6;
+    background-color: black;
     color: white;
     border: 1px solid transparent;
     border-radius: 0.25rem;
-   margin-left: 5px;
+    margin-left: 5px;
  }
    
  .shadow-textarea textarea.form-control::placeholder {
@@ -119,4 +118,84 @@ align-items: center;
 .form-label{
     font-weight: bold;
 }
-  
+
+.modal-content{
+    height: 150px;
+    width: 300px;
+    background-color:rgb(243, 242, 242);
+}
+
+.immg1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.immg:hover{
+    opacity: 0.8;
+}
+
+.serchImg{
+    position: relative;
+    text-align: center; 
+}
+
+.bottom-left{
+    position: absolute;
+   left: 40px;
+   top: 2000;
+   color: white;
+   font-weight: bold;
+}
+
+.beach{
+    text-align: left !important;
+    margin-left: 20px;   
+}
+
+.serchImg1{
+    position: relative;
+    text-align: center;   
+}
+
+.bottom-left1{
+    position: absolute;
+   left: 990px;
+   top: 2500;
+   color: white;
+   font-weight: bold;
+}
+.serchImg2{
+    position: relative;
+    text-align: center;   
+}
+
+.bottom-left2{
+   position: absolute;
+   left: 680px;
+   top: 2500;
+   color: white;
+   font-weight: bold;
+}
+
+.serchImg3{
+    text-align: center;   
+}
+.imgBottom{
+    position: relative;
+
+}
+.bottom-left3{
+   position: absolute;
+   left: 339px;
+   /* top: 2200; */
+   bottom: 160;
+   color: white;
+   font-weight: bold;
+}
+
+/* .Add{
+    text-align: center;
+    margin-left: 100px;
+}   */
