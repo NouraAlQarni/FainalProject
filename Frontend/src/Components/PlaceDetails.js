@@ -94,7 +94,6 @@ export default function PlaceDetails (){
     }
 
     return (
-
         <>
          <br/><br/><h3>Place Details</h3><br/><br/>
         <div className="PlaceDetails">
@@ -102,7 +101,13 @@ export default function PlaceDetails (){
                 <div class="card-header">
                     <img className="card" src={detail.image} height={330} width={500}/></div>
                     <div class="card-body">
-                        <h4>{detail.name}</h4>
+                      <br/><h4>{detail.name}</h4><br/>
+                        <iframe src={detail.location}
+                          width="500" height="300" 
+                          frameborder="0"
+                          tabindex="-1"
+                          allowfullscreen="" loading="lazy" >   
+                        </iframe>
                         <br/>
                     </div>
                     <div className="comment">

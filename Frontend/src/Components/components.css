@@ -46,9 +46,9 @@ a {
 
 .country {
     display: grid;
-    grid-template-columns: 1fr 1fr ;
-    gap: 30px;
-    margin-left: 120px;   
+    grid-template-columns: 1fr 1fr 1fr ;
+    gap: 25px;
+     
 }
 
 .Footer {
@@ -60,8 +60,8 @@ a {
 
 .City, .Place{
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin-left: 110px;   
+    grid-template-columns: 1fr 1fr 1fr ;
+    /* gap: 10px;  */
 }
 
 .me-1{
@@ -74,6 +74,7 @@ a {
 
 form {
   text-align: center;
+  
 }
   
 .btn {
@@ -86,6 +87,7 @@ form {
    
  .shadow-textarea textarea.form-control::placeholder {
     font-weight: 300;
+    color: white;
 }
 
 .shadow-textarea textarea.form-control {
@@ -119,11 +121,11 @@ align-items: center;
     font-weight: bold;
 }
 
-.modal-content{
+/* .modal-content{
     height: 150px;
     width: 300px;
     background-color:rgb(243, 242, 242);
-}
+} */
 
 .immg1 {
     display: flex;
@@ -139,6 +141,7 @@ align-items: center;
 .serchImg{
     position: relative;
     text-align: center; 
+    
 }
 
 .bottom-left{
@@ -195,7 +198,6 @@ align-items: center;
    font-weight: bold;
 }
 
-/* .Add{
-    text-align: center;
-    margin-left: 100px;
-}   */
+.style{
+    background-color: #F1EAF6;
+}

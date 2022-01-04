@@ -5,6 +5,8 @@ import {Link} from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import { AiFillEdit } from 'react-icons/ai';
 import { MdDeleteForever } from 'react-icons/md';
+import {Modal , Button, Form} from 'react-bootstrap';
+import { IoMdAddCircle } from 'react-icons/io';
 
 
 
@@ -13,6 +15,16 @@ export default function Place (){
     const {countryId,cityId} = useParams()
     const [place,setPlace] = useState([])
     const [loading,setLoading] = useState(true)
+    const [name,setName] = useState();
+    const [image,setImage] = useState();
+    const [location,setLocation] = useState();
+   
+
+
+    // modale
+  
+    const [lgShow, setLgShow] = useState(false);
+
 
     
     
@@ -91,20 +103,44 @@ export default function Place (){
             if (decodedData != undefined){
                   if (decodedData.typeOfUser == "admin"){
                      return (           
-                        <form>
-                        <br/><br/><br/>
-                        <input  placeholder="Place :"></input><br/>
-                        <input  placeholder="Image :"></input><br/>
-                        <input  placeholder="location :"></input><br/>
-                        <br/><br/>
-                        <button className="btn" type="submit" onClick= {(e)=>addPlace(e)}>Add</button><br/><br/>
-                     </form>
+                       <>
+                         <IoMdAddCircle onClick={() => setLgShow(true)}/> 
+                    <Modal
+                    size="sm"
+                    show={lgShow}
+                    onHide={() => setLgShow(false)}
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                  >
+                    <Modal.Header closeButton>
+                      <Modal.Title id="example-modal-sizes-title-lg">
+                      Add Place
+                      </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                    <Form>
+                    <Form.Group className="mb-1" controlId="exampleForm.ControlInput1">
+                      <Form.Control onChange={(e) => setName(e.target.value)} placeholder="place" />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                      <Form.Control onChange={(e) => setImage(e.target.value)} placeholder="image" />   
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                      <Form.Control onChange={(e) => setLocation(e.target.value)} placeholder="location" />   
+                    </Form.Group>
+                    <Form.Group>
+                    <button className='btn' type="submit" onClick= {(e)=>addPlace(e)}>Save</button><br/><br/>
+                    </Form.Group>
+                  </Form>
+                  </Modal.Body>
+                  </Modal>
+                       </>
                    )}}} 
 
 
     return (      
       <div>
-      <br/><br/><h3>Top Place</h3>
+      <br/><br/><h3>Top Place</h3>{decode1()}
         <div className="Place">
             {place.map((element)=>{
                  return (
@@ -112,20 +148,18 @@ export default function Place (){
                     <div class="card">
                       <div class="box">
                         <div class="content">
-                           <h4>{element.name}</h4>
+                        <br/><h4>{element.name}</h4>
                            {decode(element._id)}
                           <Link on to={{ pathname: `/PlaceDetails/${countryId}/${cityId}/${element._id}`,data: {element}}}>
-                          <img className="card" src={element.image} height={230} width={370}/>
-                          </Link><br/>     
+                          <img className="card" src={element.image} height={300} width={380}/>
+                          </Link><br/> 
                         </div>
                      </div>
-                    </div>
-                        <br/>
-                        <br/>    
+                    </div><br></br><br/>    
                     </div>
                  )
              })}
-             {decode1()}
+
             <br/><br/>
         </div>
         </div>

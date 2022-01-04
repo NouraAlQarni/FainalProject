@@ -5,6 +5,8 @@ import {Link} from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import { AiFillEdit } from 'react-icons/ai';
 import { MdDeleteForever } from 'react-icons/md';
+import {Modal , Button, Form} from 'react-bootstrap';
+import { IoMdAddCircle } from 'react-icons/io';
 
 
 export default function City (){
@@ -16,6 +18,10 @@ export default function City (){
     const [image,setImage] = useState();
     const [enableEdit,setEnabeEdit] = useState(false)
     const [idEdit,setIdEdit] = useState()
+
+     // modale
+  
+     const [lgShow, setLgShow] = useState(false);
 
     
     useEffect (()=> {
@@ -119,14 +125,43 @@ export default function City (){
           if (decodedData != undefined){
                 if (decodedData.typeOfUser == "admin"){
                    return (  
-                   <div><br/>        
-                    <form>
+                   <div><br/>
+                    <IoMdAddCircle onClick={() => setLgShow(true)}/> 
+                    <Modal
+                    size="sm"
+                    show={lgShow}
+                    onHide={() => setLgShow(false)}
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                  >
+                    <Modal.Header closeButton>
+                      <Modal.Title id="example-modal-sizes-title-lg">
+                      Add City
+                      </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                    <Form>
+                    <Form.Group className="mb-1" controlId="exampleForm.ControlInput1">
+                      <Form.Control onChange={(e) => setName(e.target.value)} placeholder="city" />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                      <Form.Control onChange={(e) => setImage(e.target.value)} placeholder="image" />   
+                    </Form.Group>
+                    <Form.Group>
+                    <button className='btn' type="submit" onClick= {(e)=>addCity(e)}>Save</button><br/><br/>
+                    </Form.Group>
+                  </Form>
+                  </Modal.Body>
+                  </Modal>
+					        </div>         
+
+                    /* <form>
                     <input  placeholder="City :"></input><br/>
                     <input  placeholder="Image :"></input><br/>
                     <br/>
                     <button className="btn" type="submit" onClick= {(e)=>addCity(e)}>add</button><br/><br/>
                     </form>
-                  </div> 
+                  </div>  */
         )}}} 
 
     return (
@@ -141,12 +176,12 @@ export default function City (){
           </div>
           <div class="carousel-inner">
           <div class="carousel-item">
-            <img src= "https://media.tacdn.com/media/attractions-content--1x-1/0c/96/35/b2.jpg" class="d-block w-100" alt="..."></img>
+            <img src= "https://media.tacdn.com/media/attractions-content--1x-1/0a/fa/05/17.jpg" class="d-block w-100" alt="..."></img>
               <div class="carousel-caption d-none d-md-block">
               </div>
             </div>
             <div class="carousel-item active">
-              <img src="https://media.tacdn.com/media/attractions-content--1x-1/0a/fa/05/17.jpg" class="d-block w-100"  alt="..."></img>
+              <img src="https://media.tacdn.com/media/attractions-content--1x-1/0c/96/35/b2.jpg" class="d-block w-100"  alt="..."></img>
               <div class="carousel-caption d-none d-md-block">
               </div>
             </div>
@@ -167,7 +202,7 @@ export default function City (){
           
         </div> 
 
-       <br/><br/><h3>Top City</h3>
+       <br/><br/><h3>Top City</h3>{decode1()}
        <div className="City">
             {city?.map((element)=>{
                  return (   
@@ -178,7 +213,7 @@ export default function City (){
                         <h4>{element.name}</h4>
                         {decode(element)}
                         <Link on to={{ pathname: `/Place/${more}/${element._id}`,data: {element}}}>
-                          <img className="card" src={element.image} height={230} width={370}></img>
+                          <img className="card" src={element.image} height={300} width={380}></img>
                         </Link><br/>
                     </div>
                     </div>
@@ -186,8 +221,6 @@ export default function City (){
                     </div> 
                  )
              })}
-
-            {decode1()}
 
             {(function(){
             if (enableEdit == true){

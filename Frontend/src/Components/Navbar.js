@@ -13,7 +13,7 @@ import PlaceDetails from './PlaceDetails';
 import { FiUser } from 'react-icons/fi';
 import jwt_decode from "jwt-decode";
 
-export default function Navbar (){
+export default function Navbar_ (){
 
 
   let navigate = useNavigate();
@@ -33,7 +33,6 @@ export default function Navbar (){
 
     return (
         <div className="Navbar">
-
 <Bootstrap.Nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
     <a class="navbar-brand" href="/">
@@ -71,6 +70,7 @@ export default function Navbar (){
     </div>
   </div>
 </Bootstrap.Nav>
+
           <Routes>
                 <Route exact path="/" element = { <Home />}></Route>
                 <Route path="/City/:more" element = {<City />}></Route>
