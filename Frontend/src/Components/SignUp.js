@@ -12,12 +12,15 @@ export default function SignUp (){
     const [name,setName] = useState();
     const [password,setPassword] = useState();
     const [typeOfUser,setTypeOfUser] = useState();
+    const [signError, setSignError] = useState({
+        email: "",
+        password: ""
+    })
 
 
     let navigate = useNavigate();
 
     const signup = (e) => {
-
             axios.post(`http://localhost:3001/singup`,{
              name,
              email,
@@ -26,7 +29,7 @@ export default function SignUp (){
             }     
             ).then((response) => {
                 if (response.data.errors) {
-                    alert("error")
+                    setSignError(response.data.errors)
                 } if (response.data.user) {
                     const token = response.data.user;
                     const userSign = jwt(token);
@@ -53,8 +56,10 @@ export default function SignUp (){
                      <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">SignUp</label><br/><br/>
                     <input placeholder="Name" onChange = {(e)=> {setName(e.target.value)}} type="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></input><br/>
-                    <input placeholder="Email" onChange = {(e)=> {setEmail(e.target.value)}} type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></input><br/>
-                    <input placeholder="Password" onChange = {(e)=> {setPassword(e.target.value)}} type="password" class="form-control" id="exampleInputPassword1"></input> <br/>
+                    <input placeholder="Email" onChange = {(e)=> {setEmail(e.target.value)}} type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></input>
+                    {signError.email == "" ? "" : <p className="alert alert-danger">{signError.email}</p>}<br/>
+                    <input placeholder="Password" onChange = {(e)=> {setPassword(e.target.value)}} type="password" class="form-control"></input> <br/>
+                    {signError.password == "" ? "" : <p className="alert alert-danger">{signError.password}</p>}
                     <input onChange = {(e)=> {setTypeOfUser("admin")}} type="radio" id="admin" name="signup" value="admin"></input>
                     <label for="admin">admin</label><br/>
                     <input onChange = {(e)=> {setTypeOfUser("user")}} type="radio" id="user" name="signup" value="user"></input>

@@ -1,8 +1,3 @@
-/* .App {
-  text-align: center;
-
-} */
-
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -31,24 +26,7 @@
 
 body {
   text-align: center;
-  /* background: #f8f4f2; */
 }
-
-/* body .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  max-width: 400px;
-  margin-bottom: 100px ;
-  margin-right: 140px;
-}
-
- body .container .card {
-  position: relative;
-  min-width: 90px;
-  height: 250px;
-}  */
 
 body .container .card:nth-child(1) .box .content a {
   background: #eaeef1;
@@ -56,13 +34,8 @@ body .container .card:nth-child(1) .box .content a {
 
 body .container .card .box:hover {
   transform: translateY(-20px);
-      opacity: 0.8;
+  opacity: 0.8;
 }
-/* 
-body .container .card .box .content {
-  padding: 20px;
-  text-align: center;
-} */
 
 .serchImg {
   position: relative;
@@ -71,10 +44,9 @@ body .container .card .box .content {
 .card1 {
   border: none;
   border-radius: 5px;
-  /* background-color:rgba(245, 243, 243, 0.7); */
   position: absolute;
   left: 170px;
-  top:290px; 
+  top: 290px;
 }
 
 .search {
@@ -86,7 +58,6 @@ body .container .card .box .content {
   background-color: white;
   padding: 10px;
   border-radius: 20px;
-  /* top: -40px; */
 }
 
 .search-input {
@@ -96,7 +67,7 @@ body .container .card .box .content {
   width: 100%;
   font-size: 19px;
   color: black;
-  transition: width 0.4s linear
+  transition: width 0.4s linear;
 }
 
 .search-icon {
@@ -108,12 +79,37 @@ body .container .card .box .content {
 }
 
 a:link {
-  text-decoration: none
+  text-decoration: none;
 }
 
-.carousel-caption{
+.carousel-caption {
   left: 0px;
   right: 0px;
 }
 
+.alert {
+  position: relative;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  height: 50px;
+  font-size: 15px;
+  text-align: center;
+}
 
+button {
+  background-color: black;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+}
+
+@media screen and (max-width: 767px) {
+  .Home {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+  .navbar-toggler-icon {
+    color: cadetblue;
+  }
+}

@@ -19,7 +19,7 @@ router.get ( '/getCity/:countryId/:cityId', async (request,response) => {
             if(element._id == cityid){
                 response.send(element.places)
             }
-            if (element.name == cityid){
+            if (element.name.toLowerCase() == cityid){
                 response.send(element._id)
             }
 
@@ -40,7 +40,7 @@ router.get ( '/getCity/:countryId/:cityId', async (request,response) => {
     const cityId = request.params.cityId
     const placeId = request.params.placeId
     try {
-        const country = await Country.findById(countryId)
+        const country = await Country.findById(countryId).populate("cities.places.comments")
         country.cities.forEach((element)=>{
             if(element._id == cityId){
                 element.places.forEach((element1)=>{

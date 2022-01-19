@@ -1,7 +1,6 @@
-import {Modal , Card, Form} from 'react-bootstrap';
+import {Modal , Form} from 'react-bootstrap';
 import axios  from 'axios';
 import { useEffect, useState } from "react";
-import { useParams } from "react-router"
 import {Link} from "react-router-dom";
 import img1 from "./images/sea1.jpg"
 import img2 from "./images/sea2.jpg"
@@ -20,10 +19,11 @@ export default function Home (){
   
   const [Country,setCountry] = useState([]);
   const [name,setName] = useState();
-  const [search,setSearch] = useState();
+  const [search,setSearch] = useState("");
   const [image,setImage] = useState();
   const [enableEdit,setEnabeEdit] = useState(false)
-  const [idEdit,setIdEdit] = useState()
+  const [idEdit,setIdEdit] = useState();
+ 
   
 
   let navigate = useNavigate();
@@ -42,20 +42,6 @@ export default function Home (){
     const [lgShow, setLgShow] = useState(false);
 
   /// Add Country
-
-//   const addCountry = (e) => {
-//     e.preventDefault()
-//       axios.post("http://localhost:3001/country/createCountry", {
-//            data: {
-//                name: e.target.form[0].value,
-//                image: e.target.form[1].value, 
-//               }}
-//       ).then(
-//         (response) => {
-//           console.log("Add", response.data);
-//           setCountry(response.data);
-//         })
-// }
 
     const addCountry = (e) => {
     e.preventDefault()
@@ -87,20 +73,32 @@ export default function Home (){
   // search by city 
 
   const searchCity = (e) => {
-    e.preventDefault()
+    e.preventDefault()  
+       if (search == ""){
+        return alert('you should wrait')
+       }
+
     let result = {};
 	 Country.forEach(country => country.cities.filter(city => {
-		if(city.name == search){
-			result = country
+		if(city.name.toLowerCase() == search.toLowerCase()){
+			result = country 
 		}
 	}))
-    console.log(result._id);
-    console.log(result._id);
-    axios.get(`http://localhost:3001/city/getCity/${result._id}/${search}`)
+
+
+  console.log(result._id);
+
+  
+  
+  axios.get(`http://localhost:3001/city/getCity/${result._id}/${search.toLowerCase()}`)
     .then((response) => {
       console.log(response.data);
       navigate(`/Place/${result._id}/${response.data}`)
+     }).catch(error=>{
+           alert("not found")
      })
+  //    if (searchResult == false){
+  // }
     }
  
 
@@ -195,7 +193,7 @@ export default function Home (){
 
 
     return (
-      <div>
+      <div className='Home'>
       <div id="carouselExampleSlidesOnly" className="carousel slide" data-bs-ride="carousel">
     <div className="carousel-inner">
     <div className="carousel-item active">
@@ -203,8 +201,10 @@ export default function Home (){
             <div className="card1 p-4 mt-3"> 
                 <div className="d-flex justify-content-center px-5"> 
                     <div className="search"> 
-                    <input onChange={(e)=>{setSearch(e.target.value)}} type="text" className="search-input" placeholder="Where to ?"></input>
-                    <a href="/" className="search-icon" onClick= {(e)=>searchCity(e)}><BiSearchAlt2/></a></div>
+                    <form>
+                    <input required onChange={(e)=>{setSearch(e.target.value)}} type="text" className="search-input" placeholder="Where to ?"></input>
+                    <a href="/" className="search-icon" onClick= {(e)=>searchCity(e)}><BiSearchAlt2/></a>
+                    </form></div>
                 </div>
                 </div>
             </div>
@@ -216,18 +216,20 @@ export default function Home (){
               <div className= "country">
               {Country.map ( (element) => {
                 return (
+                  <div data-aos="fade-up-right">
                   <div className="container">
-                    <div className="card">
+                    {/* <div className="card"> */}
                       <div className="box">
                         <div className="content">
                           <br/><h4>{element.name}</h4>
-                          {decode(element)}
+                          {decode(element)}<br/>
                           <Link on to={{ pathname: `/City/${element._id}`,data: {element}}}>
-                              <img className="card" src={element.image} height={390} width={380}></img>
+                              <img className="card" src={element.image}></img>
                           </Link>
-                        </div>
+                        {/* </div> */}
                       </div>
                     </div><br/><br/> 
+                  </div>
                   </div>
                   )})}
 

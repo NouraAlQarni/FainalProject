@@ -44,6 +44,7 @@ export default function PlaceDetails (){
     useEffect (()=> {
         axios.get(`http://localhost:3001/city/getPlace/${countryId}/${cityId}/${placeId}`)
         .then((response) => {
+            console.log(response.data)
         setDetail(response.data);
         setLoading(false)
         axios.get(`http://localhost:3001/place/getComment/${countryId}/${cityId}/${placeId}`)
@@ -60,6 +61,9 @@ export default function PlaceDetails (){
         const addComment = (e) => {
             e.preventDefault()
             console.log(commentBody)
+            if (storedToken == undefined){
+                return alert("you most login to add comment")
+            }
             axios.post(`http://localhost:3001/place/createComment`, { 
                     commentBody: commentBody,
                     idCountry: countryId,
@@ -78,16 +82,29 @@ export default function PlaceDetails (){
 
         // Delete Comment
 
-       const deleteComment = (e,_id) => {
+       const deleteComment = (e,element) => {
         e.preventDefault()
-        console.log(_id)
-        axios.delete(`http://localhost:3001/place/deleteComment/${countryId}/${cityId}/${placeId}/${_id}`
+        axios.delete(`http://localhost:3001/place/deleteComment/${countryId}/${cityId}/${placeId}/${element._id}`
         ).then((response) => {
         console.log(" deleted", response)
         setDetail(response.data);
         setComment(response.data.comments);
         })
         }
+
+        const decode = (element) => {
+            if (decodedData != undefined){ 
+                console.log( element.user._id);
+                console.log(decodedData.id );
+                console.log(decodedData.id == element.user._id);
+                  if ( decodedData.id == element.user._id){
+                     return (
+                        <div>
+                           <TiDelete onClick={(e)=>deleteComment(e,element)}/><hr/>
+                        </div>
+                     )}
+                  }
+                }
 
     if (loading){
         return (<p>loading...</p>)
@@ -110,15 +127,15 @@ export default function PlaceDetails (){
                         </iframe>
                         <br/>
                     </div>
+                    <h5 className="reviewTexet">REVIEWS</h5><br/>
                     <div className="comment">
                     <textarea class="form-control z-depth-1" rows="2" placeholder="Write comment ..." onChange={(e)=>{setCommentBody(e.target.value)}}></textarea>
                      <BiSend onClick={(e)=>addComment(e)} className="send"/></div>
                         {comment?.map((element)=>{
                             console.log(element)
                          return (
-                            <div>
-                                <p>{element.user.name} :{element.commentBody}</p>   
-                                <TiDelete onClick={(e)=>deleteComment(e,element._id)}/><hr/> 
+                            <div><br/>
+                               <hr/> <small>{element.user.name}: {element.commentBody}</small>{decode(element)}
                             </div>)})}
                             <br/>
             </div>

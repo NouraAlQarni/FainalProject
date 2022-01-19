@@ -9,15 +9,15 @@ const handleErrors = (err) => {
     let errors = {email: '', password: ''}
 
     if (err.message === 'incorrect email'){
-        errors.email = 'that email is not registered';
+        errors.email = 'Email is not registered';
     }
 
     if (err.message === 'incorrect password'){
-        errors.password = 'that password is not registered';
+        errors.password = 'incorrect password';
     }
 
     if (err.code === 11000){
-        errors.email = "that email is already registered"
+        errors.email = "Email is already registered"
         return errors;
     };
 
@@ -50,7 +50,7 @@ module.exports.signup_post = async (request,response) => {
    catch (err) {
       const errors = handleErrors(err);
       console.log(errors);
-      response.status(400).json({errors});
+      response.status(200).json({errors});
    }
 }
 
@@ -65,7 +65,7 @@ module.exports.login_post = async (request,response) => {
         }
         catch (err) {
             const errors = handleErrors(err);
-            response.status(400).json({errors});
+            response.status(200).json({errors});
         }
 }
 

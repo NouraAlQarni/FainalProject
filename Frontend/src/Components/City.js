@@ -166,8 +166,7 @@ export default function City (){
 
     return (
 
-        <div>
-        
+        <div className="Home">
           <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -205,18 +204,18 @@ export default function City (){
        <br/><br/><h3>Top City</h3>{decode1()}
        <div className="City">
             {city?.map((element)=>{
-                 return (   
-                    <div class="container"><br/><br/><br/>
-                    <div class="card">
+                 return ( 
+                    <div class="container"><br/>
+                    {/* <div class="card"> */}
                       <div class="box">
                         <div class="content">
                         <h4>{element.name}</h4>
-                        {decode(element)}
+                        {decode(element)}<br/>
                         <Link on to={{ pathname: `/Place/${more}/${element._id}`,data: {element}}}>
-                          <img className="card" src={element.image} height={300} width={380}></img>
+                          <img className="card" src={element.image}></img>
                         </Link><br/>
                     </div>
-                    </div>
+                    {/* </div> */}
                     </div>
                     </div> 
                  )

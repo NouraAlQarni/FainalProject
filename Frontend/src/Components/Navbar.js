@@ -32,6 +32,7 @@ export default function Navbar_ (){
  }
 
     return (
+      <>
         <div className="Navbar">
 <Bootstrap.Nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
@@ -39,6 +40,9 @@ export default function Navbar_ (){
       <img  src={logo1} alt="" width="65" height="65" class="d-inline-block align-text-top"></img>
       <h5>Dream</h5> 
     </a>
+    {/* <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon" ></span>
+    </button> */}
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -70,7 +74,7 @@ export default function Navbar_ (){
     </div>
   </div>
 </Bootstrap.Nav>
-
+ </div>
           <Routes>
                 <Route exact path="/" element = { <Home />}></Route>
                 <Route path="/City/:more" element = {<City />}></Route>
@@ -81,6 +85,7 @@ export default function Navbar_ (){
                 <Route path="/Login" element = {<Login />}></Route>
                 <Route path="/SignUp" element = {<SignUp />}></Route>  
            </Routes>
-        </div>
+       
+        </>
     )
 }

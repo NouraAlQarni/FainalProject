@@ -45,10 +45,9 @@ a {
 }
 
 .country {
+    text-align: center;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr ;
-    gap: 25px;
-     
 }
 
 .Footer {
@@ -60,8 +59,13 @@ a {
 
 .City, .Place{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr ;
-    /* gap: 10px;  */
+    grid-template-columns: 1fr 1fr ;
+    margin-left: 120px;
+    text-align: center !important;
+}
+
+h4 {
+    margin-right: 110px;
 }
 
 .me-1{
@@ -121,12 +125,6 @@ align-items: center;
     font-weight: bold;
 }
 
-/* .modal-content{
-    height: 150px;
-    width: 300px;
-    background-color:rgb(243, 242, 242);
-} */
-
 .immg1 {
     display: flex;
     flex-direction: row;
@@ -137,11 +135,14 @@ align-items: center;
 .immg:hover{
     opacity: 0.8;
 }
+.card:hover{
+    opacity: 0.8;
+    transform: translateY(-20px);
+}
 
 .serchImg{
     position: relative;
-    text-align: center; 
-    
+    text-align: center;    
 }
 
 .bottom-left{
@@ -169,6 +170,7 @@ align-items: center;
    color: white;
    font-weight: bold;
 }
+
 .serchImg2{
     position: relative;
     text-align: center;   
@@ -185,14 +187,14 @@ align-items: center;
 .serchImg3{
     text-align: center;   
 }
+
 .imgBottom{
     position: relative;
-
 }
+
 .bottom-left3{
    position: absolute;
    left: 339px;
-   /* top: 2200; */
    bottom: 160;
    color: white;
    font-weight: bold;
@@ -200,4 +202,85 @@ align-items: center;
 
 .style{
     background-color: #F1EAF6;
+}
+
+h5{
+    text-align: left;
+    margin: 15px;
+}
+
+.reviewTexet{
+    font-weight: bold;
+}
+
+.content img{
+    width: 380px;
+    height: 330px;
+    object-fit: cover;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  
+}
+
+
+@media screen and (max-width: 767px) {
+#root div{
+    width: 100%;
+}
+    img.d-block.w-100{
+        width: 100%
+    }
+  .country, .City, .Place{
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    grid-gap: 50px;
+  }
+ .navbar-toggler-icon button{
+  color: cadetblue;
+ } 
+ .navbar-brand {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+.serchImg {
+    width: 1500px;
+  }
+.search{
+    display: grid;
+    grid-template-columns: 1fr;
+}
+.content{
+    /* display: grid;
+    grid-template-columns: 1fr; */
+ 
+   justify-self: center ;
+}
+
+.Login {
+    margin-left:0px;
+}
+
+.SignUp {
+   margin-left: 0px;   
+}
+h3{
+    text-align: center;
+   font-size: 20vw;
+}
+h4{
+    font-size: 15vw;
+}
+
+div#carouselExampleSlidesOnly{
+    width:100%
+}
+
+.content img{
+    margin:0px;
+    width: 980px;
+    height: 930px;
+    object-fit: cover;
+}
 }

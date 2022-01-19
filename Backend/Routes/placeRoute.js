@@ -16,14 +16,18 @@ router.get ( '/getComment/:countryId/:cityId/:placeId', async (request,response)
     const countryid = request.params.countryId
     const cityid = request.params.cityId
     try {
-        const country = await Country.findById(countryid).populate("cities.places.comments")
+        
+        const country = await Country.findById(countryid).populate({path: "cities.places.comments", populate:{ path: 'user', select:'name'}})
+        // .exec(function (err, result){
+        //     console.log(result);
+        //     response.send(result)
+        // })
 
         country.cities.forEach((element)=>{
             if(element._id == cityid){
                 element.places.forEach(async (element)=>{
                     if(element._id == request.params.placeId ){
-                        console.log("ggg")      
-                        response.send(element)
+                      response.send(element)
                     }
                 })
             }
@@ -125,7 +129,7 @@ router.delete ( '/deleteComment/:idCountry/:idCity/:idplace/:commentID', async (
         // response.send('Done')
     // })
     console.log(request.params.idCountry);
-    await Country.findById(request.params.idCountry).populate("cities.places.comments").then(country => {
+    await Country.findById(request.params.idCountry).populate({path: "cities.places.comments", populate:{ path: 'user', select:'name'}}).then(country => {
 
         const cityid = request.params.idCity;
         const user = request.params.iduser;

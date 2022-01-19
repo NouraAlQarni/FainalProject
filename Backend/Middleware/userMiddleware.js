@@ -2,8 +2,8 @@
 const jwt = require('jsonwebtoken');
 const User = require('../Models/User');
 
-const requireUser = (request, response , next) => {
 
+const requireUser = (request, response , next) => {
     const token = request.cookies.jwt;
     if (token) {
         jwt.verify(token, 'noura secret', (err,decodedToken) => {
@@ -14,13 +14,13 @@ const requireUser = (request, response , next) => {
                 console.log(decodedToken);
                 next();
             }
-        })
-
-    }
+        })}
     else {
         response.redirect('/login');
     }
 }
+
+
 
 const checkUser = (request,response,next) => {
     const token = request.cookies.jwt;
@@ -34,7 +34,7 @@ const checkUser = (request,response,next) => {
                 console.log(decodedToken);
                 let user =  User.findById(decodedToken.id);
                 response.locals.user = user;
-                next();
+                 next();
             }
         })
     } else {

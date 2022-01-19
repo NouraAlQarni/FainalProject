@@ -139,29 +139,32 @@ export default function Place (){
 
 
     return (      
-      <div>
+      <div className="Home">
       <br/><br/><h3>Top Place</h3>{decode1()}
         <div className="Place">
             {place.map((element)=>{
                  return (
+                 
                  <div class="container"><br/><br/><br/>
-                    <div class="card">
+                    {/* <div class="card"> */}
                       <div class="box">
                         <div class="content">
-                        <br/><h4>{element.name}</h4>
-                           {decode(element._id)}
                           <Link on to={{ pathname: `/PlaceDetails/${countryId}/${cityId}/${element._id}`,data: {element}}}>
-                          <img className="card" src={element.image} height={300} width={380}/>
+                          <img className="card" src={element.image} />
                           </Link><br/> 
+                          <br/><h3>{element.name}</h3>
+                           {decode(element._id)}
                         </div>
-                     </div>
+                     {/* </div> */}
                     </div><br></br><br/>    
                     </div>
+                    
                  )
              })}
 
             <br/><br/>
         </div>
+        <br/><br/>
         </div>
 
     )}
